@@ -4,6 +4,12 @@ import tailwindcss from 'tailwindcss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    host: 'localhost',
+    fs: {
+      allow: [".."]
+    }
+  },
   plugins: [react()],
   css: {
     postcss: {
