@@ -5,9 +5,9 @@ import Footer from "./Footer.tsx";
 const AppLayout = ({ children }: { children: ReactElement }) => {
     return (
         <div className="w-full jost-font">
-            <Header />
+            <Header data-testid='header' />
             {children}
-            <Footer />
+            <Footer data-testid='footer' />
         </div>
     )
 }
