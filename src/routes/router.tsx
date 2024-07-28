@@ -4,6 +4,7 @@ import More from "../pages/more/More.tsx";
 import Movies from "../pages/movies/Movies.tsx";
 import People from "../pages/people/People.tsx";
 import TvShow from "../pages/tv-shows/TvShow.tsx";
+import NotFound from "../pages/not-found/NotFound.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -25,5 +26,9 @@ export const router = createBrowserRouter([
     {
         path: '/tv-shows',
         element: <TvShow />
+    },
+    {
+        path: '*',
+        element: <NotFound />
     }
 ])

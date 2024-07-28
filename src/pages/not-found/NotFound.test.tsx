@@ -2,24 +2,24 @@ import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { describe, it, expect } from "vitest";
 import { BrowserRouter } from "react-router-dom";
-import Movies from "../Movies.tsx";
+import NotFound from "./NotFound.tsx";
 
 describe("Home component", () => {
     it('renders without crashing', () => {
         render(
             <BrowserRouter>
-                <Movies />
+                <NotFound />
             </BrowserRouter>
         );
-        expect(screen.getByTestId('movies-element')).toBeInTheDocument();
+        expect(screen.getByTestId('not-found-element')).toBeInTheDocument();
     });
 
-    it('contains the expected content', () => {
+    it('contains the expected 404 content', () => {
         render(
             <BrowserRouter>
-                <Movies />
+                <NotFound />
             </BrowserRouter>
         );
-        expect(screen.getByTestId('movies-h1-element')).toBeInTheDocument();
+        expect(screen.getByText('404')).toBeInTheDocument();
     });
 });
