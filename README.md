@@ -10,7 +10,6 @@ This uses Vite, React, TypeScript, and Tailwind CSS. This is to showcase new fea
 - Light/dark mode toggle
 - React 19 features
 - Pre commit hooks
-- Unit tests with **Jest** and React Testing Library
 - Github actions for CI/CD
 
 ## Environment Variables
