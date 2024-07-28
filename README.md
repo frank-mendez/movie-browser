@@ -1,30 +1,68 @@
-# React + TypeScript + Vite
+# Movie browser
+This is a simple movie browser that uses the [TheMovie Database API](https://www.themoviedb.org/documentation/api) to fetch movies and display them in a grid.
+This uses Vite, React, TypeScript, and Tailwind CSS. This is to showcase new feature of React 19 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Light/dark mode toggle
+- React 19 features
+- Pre commit hooks
+- Unit tests with **Jest** and React Testing Library
+- Github actions for CI/CD
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Environment Variables
 
-- Configure the top-level `parserOptions` property like this:
+To run this project, you will need to add the following environment variables to your .env file
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+`VITE_TMDB_API_KEY`
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/frank-mendez/movie-browser
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+
+```bash
+  cd movie-browser
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+## Contributing
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+Please adhere to this project's `code of conduct`.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
