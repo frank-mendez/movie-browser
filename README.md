@@ -1,6 +1,6 @@
 # Movie browser
 This is a simple movie browser that uses the [TheMovie Database API](https://www.themoviedb.org/documentation/api) to fetch movies and display them in a grid.
-This uses Vite, React, TypeScript, and Tailwind CSS. This is to showcase new feature of React 19 🚀
+This uses Vite, React, TypeScript, and Tailwind CSS 🚀
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
