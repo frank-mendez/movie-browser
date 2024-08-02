@@ -23,8 +23,18 @@ const Home = () => {
                     </div>
                 </div>
                 <div className='grid grid-cols-5 gap-6 items-center'>
-                    {isPending && <Loading />}
-                    {data && data?.results.length > 0 && <MovieCard movies={data.results} />}
+                    {isPending && <Loading/>}
+                    {data && data?.results.length > 0 && <MovieCard movies={data.results}/>}
+                </div>
+                <div className='flex flex-row gap-4 items-center'>
+                    <h1 className='text-4xl my-6'>What's Popular</h1>
+                    <div role="tablist" className="tabs tabs-boxed">
+                        <button role="tab" className="tab tab-active">Popular</button>
+                        <button role="tab" className="tab ">Streaming</button>
+                        <button role="tab" className="tab ">On TV</button>
+                        <button role="tab" className="tab ">For Rent</button>
+                        <button role="tab" className="tab ">In Theaters</button>
+                    </div>
                 </div>
             </div>
         </AppLayout>
