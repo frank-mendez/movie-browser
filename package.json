@@ -19,6 +19,7 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.2",
     "luxon": "^3.4.4",
+    "nuqs": "^1.17.6",
     "prettier": "^3.3.3",
     "query-string": "^9.1.0",
     "react": "^18.3.1",
