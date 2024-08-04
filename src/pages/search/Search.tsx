@@ -42,6 +42,7 @@ const Search = () => {
       <div className="container m-auto">
         <div className="flex flex-row gap-2 my-10">
           <input
+            data-testid="search-input"
             className="input input-bordered w-full"
             type="text"
             placeholder="Search for a movie, tv show, person"
@@ -52,7 +53,9 @@ const Search = () => {
         </div>
         <div className="flex flex-row gap-4">
           <div className="flex flex-col flex-none gap-4">
-            <h1 className="text-4xl">Search Results</h1>
+            <h1 data-testid="search-result" className="text-4xl">
+              Search Results
+            </h1>
             <button className="btn justify-between btn-active">
               Movies
               <div
