@@ -51,6 +51,27 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test
+  coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Generate coverage report
+        run: npm run coverage
+      - name: Check coverage
+        run: |
+          COVERAGE=$(cat coverage/lcov.info | grep 'Lines' | sed 's/^.*: \([0-9.]*\)%.*$/\1/')
+          if (( $(echo "$COVERAGE < 90" | bc -l) )); then
+            echo "Code coverage is less than 90%"
+            exit 1
+          fi
   build:
     needs: test
     runs-on: ubuntu-latest
