@@ -15,7 +15,7 @@ const MovieCard = ({ movies }: { movies: Movie[] }) => {
             <figure>
               <img
                 src={`${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.poster_path}`}
-                alt="Shoes"
+                alt="Movie"
               />
             </figure>
             <div className="card-body">

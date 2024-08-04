@@ -21,3 +21,8 @@ export type Result = {
   vote_average: number;
   vote_count: number;
 };
+
+export type SearchMovieKeywordQuery = {
+  query: string;
+  page: string;
+};
