@@ -19,7 +19,11 @@ This uses Vite, React, TypeScript, and Tailwind CSS 🚀
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`VITE_TMDB_API_KEY`
+`VITE_TMDB_API_KEY`,
+`VITE_TMDB_API_URL`,
+`VITE_TMDB_IMAGE_URL`
+
+Check the `.env.example` file for the required variables
 
 
 ## Run Locally
