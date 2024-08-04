@@ -8,7 +8,10 @@ This uses Vite, React, TypeScript, and Tailwind CSS 🚀
 ## Features
 
 - Light/dark mode toggle
-- React 19 features
+- Search movies, tv shows, and people
+- Unit tests using React Testing Library, Vite, and Jest
+- Data Caching using React Query
+- Code Coverage Report
 - Pre commit hooks
 - Github actions for CI/CD
 
