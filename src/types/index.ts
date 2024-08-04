@@ -1,4 +1,4 @@
 import { MovieResponse, Movie } from "./movies.ts";
-import { SearchResult } from "./search.ts";
+import { SearchResult, SearchMovieKeywordQuery } from "./search.ts";
 
-export type { MovieResponse, Movie, SearchResult };
+export type { MovieResponse, Movie, SearchResult, SearchMovieKeywordQuery };
