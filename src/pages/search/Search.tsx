@@ -8,16 +8,23 @@ import {
   useSearchPeopleKeywordQuery,
   useSearchTvShowKeywordQuery,
 } from "../../api/search/query/useSearchMovieKeywordQuery.ts";
-import Loading from "../../components/Loading.tsx";
-import { DateTime } from "luxon";
-import { hasGoodImageExtension, truncateString } from "../../utils/utils.ts";
+import { SearchTabEnums } from "../../enums";
+import { useState } from "react";
+import { SearchTabTypes } from "../../types";
+import SearchTab from "./SearchTab.tsx";
+import SearchMovieResult from "./SearchMovieResult.tsx";
+import SearchPeopleResult from "./SearchPeopleResult.tsx";
 
 const Search = () => {
   const [search, setSearch] = useSearchParams();
+  const [currentSearchTab, setCurrentSearchTab] = useState<SearchTabEnums>(
+    SearchTabEnums.MOVIES,
+  );
   const params = {
     query: search.get("query") || "",
     page: search.get("page") || "1",
   };
+
   const { data: movieData, isPending: moviePending } =
     useSearchMovieKeywordQuery(params);
   const { data: tvShowData, isPending: tvShowPending } =
@@ -36,6 +43,55 @@ const Search = () => {
     window.scrollTo(0, 0);
   };
   const currentPage = parseInt(search.get("page") || "1") - 1;
+
+  const handleTabChange = (value: SearchTabEnums) => {
+    setCurrentSearchTab(value);
+  };
+
+  const SearchTabs: SearchTabTypes[] = [
+    {
+      loading: moviePending,
+      count: movieData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.MOVIES,
+      title: SearchTabEnums.MOVIES,
+      onClick: handleTabChange,
+    },
+    {
+      loading: tvShowPending,
+      count: tvShowData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.TV_SHOWS,
+      title: SearchTabEnums.TV_SHOWS,
+      onClick: handleTabChange,
+    },
+    {
+      loading: peoplePending,
+      count: peopleData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.PEOPLE,
+      title: SearchTabEnums.PEOPLE,
+      onClick: handleTabChange,
+    },
+    {
+      loading: keywordPending,
+      count: keywordData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.KEYWORDS,
+      title: SearchTabEnums.KEYWORDS,
+      onClick: handleTabChange,
+    },
+    {
+      loading: collectionPending,
+      count: collectionData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.COLLECTIONS,
+      title: SearchTabEnums.COLLECTIONS,
+      onClick: handleTabChange,
+    },
+    {
+      loading: companyPending,
+      count: companyData?.total_results || 0,
+      isActive: currentSearchTab === SearchTabEnums.COMPANIES,
+      title: SearchTabEnums.COMPANIES,
+      onClick: handleTabChange,
+    },
+  ];
 
   return (
     <AppLayout>
@@ -56,139 +112,49 @@ const Search = () => {
             <h1 data-testid="search-result" className="text-4xl">
               Search Results
             </h1>
-            <button className="btn justify-between btn-active">
-              Movies
-              <div
-                className={`badge badge-info ${moviePending ? "skeleton w-10" : ""}`}
-              >
-                {movieData?.total_results}
-              </div>
-            </button>
-            <button className="btn justify-between">
-              TV Shows
-              <div
-                className={`badge badge-info ${tvShowPending ? "skeleton w-10" : ""}`}
-              >
-                {tvShowData?.total_results}
-              </div>
-            </button>
-            <button className="btn justify-between">
-              People
-              <div
-                className={`badge badge-info ${peoplePending ? "skeleton w-10" : ""}`}
-              >
-                {peopleData?.total_results}
-              </div>
-            </button>
-            <button className="btn justify-between">
-              Keywords
-              <div
-                className={`badge badge-info ${keywordPending ? "skeleton w-10" : ""}`}
-              >
-                {keywordData?.total_results}
-              </div>
-            </button>
-            <button className="btn justify-between">
-              Collections
-              <div
-                className={`badge badge-info ${collectionPending ? "skeleton w-10" : ""}`}
-              >
-                {collectionData?.total_results}
-              </div>
-            </button>
-            <button className="btn justify-between">
-              Companies
-              <div
-                className={`badge badge-info ${companyPending ? "skeleton w-10" : ""}`}
-              >
-                {companyData?.total_results}
-              </div>
-            </button>
+            {SearchTabs.map((tab) => (
+              <SearchTab
+                title={tab.title}
+                loading={tab.loading}
+                onClick={tab.onClick}
+                count={tab.count}
+                isActive={tab.isActive}
+                key={tab.title}
+              />
+            ))}
           </div>
-          <div className="flex flex-col flex-1 gap-6 cursor-pointer">
-            {moviePending && <Loading />}
-            {movieData?.results.map((movie) => {
-              const releaseDate = movie.release_date;
-              const imgSrc = hasGoodImageExtension(movie.poster_path)
-                ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.poster_path}`
-                : "/assets/images/default.png";
-              return (
-                <div
-                  key={movie.id}
-                  className="card card-side bg-base-200 shadow-xl w-full h-52 flex flex-row"
-                >
-                  <figure className="flex-none">
-                    <img
-                      className="max-w-[200px] h-full"
-                      src={imgSrc}
-                      alt="Movie"
-                    />
-                  </figure>
-                  <div className="card-body flex-1">
-                    <h2 className="card-title">{movie.title}</h2>
-                    <p className="text-gray-500">
-                      Release Date:{" "}
-                      {releaseDate
-                        ? DateTime.fromISO(releaseDate).toFormat("DDD")
-                        : ""}
-                    </p>
-                    <p>Vote average: {movie.vote_average}</p>
-                    <p>{truncateString(movie.overview, 200)}</p>
-                  </div>
-                </div>
-              );
-            })}
-            <div className="join m-auto">
-              {movieData && movieData?.total_pages > 1 && (
-                <>
-                  {currentPage > 0 && (
-                    <button
-                      onClick={() => handlePageChange(currentPage)}
-                      className="join-item btn mr-2"
-                    >
-                      «
-                    </button>
-                  )}
-                  {Array.from({ length: movieData.total_pages }, (_, i) => {
-                    const currentPage = parseInt(search.get("page") || "1") - 1;
-                    if (
-                      (i >= currentPage && i < currentPage + 4) ||
-                      i === movieData.total_pages - 1
-                    ) {
-                      return (
-                        <button
-                          onClick={() => handlePageChange(i + 1)}
-                          key={i}
-                          className={`btn mr-2 ${
-                            i + 1 === parseInt(search.get("page") || "1")
-                              ? "btn-active"
-                              : ""
-                          }`}
-                        >
-                          {i + 1}
-                        </button>
-                      );
-                    } else if (i === currentPage + 4) {
-                      return (
-                        <button key={i} className="btn mr-2 btn-disabled">
-                          ...
-                        </button>
-                      );
-                    }
-                    return null;
-                  })}
-                  {currentPage < movieData.total_pages - 1 && (
-                    <button
-                      onClick={() => handlePageChange(currentPage + 2)}
-                      className="join-item btn"
-                    >
-                      »
-                    </button>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
+          {currentSearchTab === SearchTabEnums.MOVIES && (
+            <SearchMovieResult
+              loading={moviePending}
+              data={movieData}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          )}
+          {currentSearchTab === SearchTabEnums.TV_SHOWS && (
+            <SearchMovieResult
+              loading={tvShowPending}
+              data={tvShowData}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          )}
+          {currentSearchTab === SearchTabEnums.PEOPLE && (
+            <SearchPeopleResult
+              loading={peoplePending}
+              handlePageChange={handlePageChange}
+              data={peopleData}
+              currentPage={currentPage}
+            />
+          )}
+          {currentSearchTab === SearchTabEnums.COLLECTIONS && (
+            <SearchMovieResult
+              loading={collectionPending}
+              data={collectionData}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          )}
         </div>
       </div>
     </AppLayout>
