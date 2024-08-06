@@ -14,6 +14,8 @@ import { SearchTabTypes } from "../../types";
 import SearchTab from "./SearchTab.tsx";
 import SearchMovieResult from "./SearchMovieResult.tsx";
 import SearchPeopleResult from "./SearchPeopleResult.tsx";
+import SearchKeywordResult from "./SearchKeywordResult.tsx";
+import SearchCompanyResult from "./SearchCompanyResult.tsx";
 
 const Search = () => {
   const [search, setSearch] = useSearchParams();
@@ -45,6 +47,7 @@ const Search = () => {
   const currentPage = parseInt(search.get("page") || "1") - 1;
 
   const handleTabChange = (value: SearchTabEnums) => {
+    setSearch({ page: "1", query: search.get("query") || "" });
     setCurrentSearchTab(value);
   };
 
@@ -151,6 +154,22 @@ const Search = () => {
             <SearchMovieResult
               loading={collectionPending}
               data={collectionData}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          )}
+          {currentSearchTab === SearchTabEnums.KEYWORDS && (
+            <SearchKeywordResult
+              loading={keywordPending}
+              data={keywordData}
+              handlePageChange={handlePageChange}
+              currentPage={currentPage}
+            />
+          )}
+          {currentSearchTab === SearchTabEnums.COMPANIES && (
+            <SearchCompanyResult
+              loading={companyPending}
+              data={companyData}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
             />

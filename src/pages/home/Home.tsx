@@ -9,6 +9,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [search, setSearch] = useSearchParams();
   const [trendingTab, setTrendingTab] = useState<TrendingTabEnum>(
     TrendingTabEnum.TODAY,
   );
@@ -28,7 +29,11 @@ const Home = () => {
     navigate(`/search?${search.toString()}`);
   };
 
-  const [search, setSearch] = useSearchParams();
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <AppLayout>
@@ -43,6 +48,7 @@ const Home = () => {
             placeholder="Search for a movie, tv show, person"
             value={search.get("query") || ""}
             onChange={(e) => setSearch({ query: e.target.value })}
+            onKeyDown={handleKeyDown}
           />
           <button className="btn" onClick={handleSearch}>
             Search
