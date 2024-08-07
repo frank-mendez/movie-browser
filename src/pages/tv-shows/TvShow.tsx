@@ -52,7 +52,7 @@ const TvShow = () => {
 
   return (
     <AppLayout>
-      <div data-testid="tvshow-element" className="container m-auto p-4">
+      <div data-testid="tvshow-element" className="container m-auto py-6">
         <SearchBar />
         <div role="tablist" className="tabs tabs-boxed my-10">
           {tvShowTabs.map((tab) => (
