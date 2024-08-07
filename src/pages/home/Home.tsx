@@ -4,12 +4,9 @@ import Loading from "../../components/Loading.tsx";
 import MovieCard from "../../components/MovieCard.tsx";
 import { useState } from "react";
 import { TrendingParamsEnum, TrendingTabEnum } from "../../enums";
-import { Search } from "@mui/icons-material";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import SearchBar from "../../components/SearchBar.tsx";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const [search, setSearch] = useSearchParams();
   const [trendingTab, setTrendingTab] = useState<TrendingTabEnum>(
     TrendingTabEnum.TODAY,
   );
@@ -25,36 +22,13 @@ const Home = () => {
     setTrendingTab(trending);
   };
 
-  const handleSearch = () => {
-    navigate(`/search?${search.toString()}`);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
   return (
     <AppLayout>
       <div
         data-testid="home-element"
         className="container flex flex-col gap-4 m-auto p-4"
       >
-        <div className="flex flex-row gap-2">
-          <input
-            className="input input-bordered w-full"
-            type="text"
-            placeholder="Search for a movie, tv show, person"
-            value={search.get("query") || ""}
-            onChange={(e) => setSearch({ query: e.target.value })}
-            onKeyDown={handleKeyDown}
-          />
-          <button className="btn" onClick={handleSearch}>
-            Search
-            <Search />
-          </button>
-        </div>
+        <SearchBar />
         <div className="flex flex-row gap-4 items-center">
           <h1 className="text-4xl my-6">Trending</h1>
           <div role="tablist" className="tabs tabs-boxed">
