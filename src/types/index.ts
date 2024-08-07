@@ -1,4 +1,9 @@
-import { MovieResponse, Movie } from "./movies.ts";
+import {
+  MovieResponse,
+  Movie,
+  MovieTabInterface,
+  MovieParams,
+} from "./movies.ts";
 import {
   SearchResult,
   SearchMovieKeywordQuery,
@@ -15,4 +20,6 @@ export type {
   SearchTabTypes,
   SearchPaginationProps,
   SearchMovieResultProps,
+  MovieTabInterface,
+  MovieParams,
 };
