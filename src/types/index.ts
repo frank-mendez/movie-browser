@@ -11,6 +11,7 @@ import {
   SearchPaginationProps,
   SearchMovieResultProps,
 } from "./search.ts";
+import { TvShowTabInterface } from "./tvShow.ts";
 
 export type {
   MovieResponse,
@@ -22,4 +23,5 @@ export type {
   SearchMovieResultProps,
   MovieTabInterface,
   MovieParams,
+  TvShowTabInterface,
 };
