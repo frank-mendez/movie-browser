@@ -13,7 +13,7 @@ const SearchBar = () => {
     navigate(`/search?${search.toString()}`);
   };
   return (
-    <div className="flex flex-row gap-2">
+    <div data-testid="searchbar-element" className="flex flex-row gap-2">
       <input
         className="input input-bordered w-full"
         type="text"
