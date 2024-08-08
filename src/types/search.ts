@@ -1,5 +1,6 @@
 import { SearchTabEnums } from "../enums";
 import { MovieResponse } from "./movies.ts";
+import { PopularPeopleResponse } from "./people.ts";
 
 export type SearchResult = {
   page: number;
@@ -67,7 +68,7 @@ export type SearchTabTypes = {
 
 export type SearchPaginationProps = {
   currentPage: number;
-  data?: SearchResult | MovieResponse;
+  data?: SearchResult | MovieResponse | PopularPeopleResponse;
   handlePageChange: (page: number) => void;
 };
 
