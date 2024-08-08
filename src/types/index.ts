@@ -12,6 +12,7 @@ import {
   SearchMovieResultProps,
 } from "./search.ts";
 import { TvShowTabInterface } from "./tvShow.ts";
+import { PopularPeopleResponse, PopularPerson } from "./people.ts";
 
 export type {
   MovieResponse,
@@ -24,4 +25,6 @@ export type {
   MovieTabInterface,
   MovieParams,
   TvShowTabInterface,
+  PopularPeopleResponse,
+  PopularPerson,
 };
