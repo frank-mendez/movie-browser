@@ -27,7 +27,7 @@ const People = () => {
             data.results.map((person) => (
               <div
                 key={person.id}
-                className="card bg-base-100 w-auto shadow-xl"
+                className="card bg-base-300 w-500 shadow-xl cursor-pointer hover:animate-pulse"
               >
                 <figure>
                   <img
@@ -45,7 +45,7 @@ const People = () => {
                             item.title ?? item.name ?? item.original_name,
                         )
                         .join(", "),
-                      60,
+                      40,
                     )}
                   </p>
                 </div>
