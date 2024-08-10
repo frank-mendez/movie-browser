@@ -1,5 +1,5 @@
 import Loading from "../../components/Loading.tsx";
-import { hasGoodImageExtension, truncateString } from "../../utils/utils.ts";
+import { hasValidImageExtension, truncateString } from "../../utils/utils.ts";
 import { DateTime } from "luxon";
 import SearchPagination from "./SearchPagination.tsx";
 import { SearchMovieResultProps } from "../../types";
@@ -16,7 +16,7 @@ const SearchMovieResult = ({
       {data?.results.map((movie) => {
         const releaseDate =
           movie.release_date ?? movie.first_air_date ?? undefined;
-        const imgSrc = hasGoodImageExtension(movie.poster_path)
+        const imgSrc = hasValidImageExtension(movie.poster_path)
           ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.poster_path}`
           : "/assets/images/default.png";
         return (

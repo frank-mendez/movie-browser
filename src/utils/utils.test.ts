@@ -1,6 +1,6 @@
 import { test, describe } from "vitest";
 import assert from "assert";
-import { hasGoodImageExtension, truncateString } from "./utils";
+import { hasValidImageExtension, truncateString } from "./utils";
 
 describe("truncateString", () => {
   test("returns the original string if its length is less than the limit", () => {
@@ -22,22 +22,22 @@ describe("truncateString", () => {
   });
 });
 
-describe("hasGoodImageExtension", () => {
+describe("hasValidImageExtension", () => {
   test("returns true for URLs with good image extensions", () => {
     const url = "https://example.com/image.jpg";
-    const result = hasGoodImageExtension(url);
+    const result = hasValidImageExtension(url);
     assert.strictEqual(result, true);
   });
 
   test("returns false for URLs with bad image extensions", () => {
     const url = "https://example.com/image.bad";
-    const result = hasGoodImageExtension(url);
+    const result = hasValidImageExtension(url);
     assert.strictEqual(result, false);
   });
 
   test("returns false for URLs without extensions", () => {
     const url = "https://example.com/image";
-    const result = hasGoodImageExtension(url);
+    const result = hasValidImageExtension(url);
     assert.strictEqual(result, false);
   });
 });

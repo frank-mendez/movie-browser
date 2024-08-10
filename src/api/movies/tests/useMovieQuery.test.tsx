@@ -1,4 +1,4 @@
-import { useTrendingMoviesQuery } from "./useMovieQuery.ts";
+import { useTrendingMoviesQuery } from "../query/useMovieQuery.ts";
 import { TrendingParamsEnum } from "../../../enums";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";

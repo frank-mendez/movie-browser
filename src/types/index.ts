@@ -3,6 +3,7 @@ import {
   Movie,
   MovieTabInterface,
   MovieParams,
+  MoviesDetails,
 } from "./movies.ts";
 import {
   SearchResult,
@@ -27,4 +28,5 @@ export type {
   TvShowTabInterface,
   PopularPeopleResponse,
   PopularPerson,
+  MoviesDetails,
 };

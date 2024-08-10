@@ -1,4 +1,8 @@
-import { getMovies, getTrendingMovies } from "../service/movies.service.ts";
+import {
+  getMovieDetails,
+  getMovies,
+  getTrendingMovies,
+} from "../service/movies.service.ts";
 import movieKeys from "./query-key-factory.ts";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingParamsEnum } from "../../../enums";
@@ -19,5 +23,12 @@ export const useMoviesQuery = (params: MovieParams) => {
   return useQuery({
     queryKey: movieKeys.movieCollection(params),
     queryFn: () => getMovies(params),
+  });
+};
+
+export const useMovieDetailsQuery = (id: string) => {
+  return useQuery({
+    queryKey: movieKeys.movieDetails(id),
+    queryFn: () => getMovieDetails(id),
   });
 };

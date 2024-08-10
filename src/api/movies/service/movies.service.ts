@@ -1,5 +1,5 @@
 import { axios } from "../../../config/axios.ts";
-import { MovieResponse } from "../../../types";
+import { MovieResponse, MoviesDetails } from "../../../types";
 import { TrendingParamsEnum } from "../../../enums";
 import { MovieParams } from "../../../types/movies.ts";
 
@@ -16,4 +16,10 @@ export const getMovies = (data: MovieParams): Promise<MovieResponse> => {
   return axios
     .get(`/movie/${params}?language=en-US&page=${page}`)
     .then((response) => response.data as MovieResponse);
+};
+
+export const getMovieDetails = (id: string): Promise<MoviesDetails> => {
+  return axios
+    .get(`/movie/${id}?language=en-US`)
+    .then((response) => response.data as MoviesDetails);
 };
