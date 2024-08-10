@@ -1,6 +1,6 @@
 import { SearchMovieResultProps } from "../../types";
 import Loading from "../../components/Loading.tsx";
-import { hasGoodImageExtension } from "../../utils/utils.ts";
+import { hasValidImageExtension } from "../../utils/utils.ts";
 import SearchPagination from "./SearchPagination.tsx";
 
 const SearchPeopleResult = ({
@@ -13,7 +13,7 @@ const SearchPeopleResult = ({
     <div className="flex flex-col flex-1 gap-6 cursor-pointer">
       {loading && <Loading />}
       {data?.results.map((movie) => {
-        const imgSrc = hasGoodImageExtension(movie.profile_path)
+        const imgSrc = hasValidImageExtension(movie.profile_path)
           ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.profile_path}`
           : "/assets/images/default.png";
         return (
