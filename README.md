@@ -21,7 +21,8 @@ To run this project, you will need to add the following environment variables to
 
 `VITE_TMDB_API_KEY`,
 `VITE_TMDB_API_URL`,
-`VITE_TMDB_IMAGE_URL`
+`VITE_TMDB_IMAGE_URL`,
+`VITE_TMDB_IMAGE_MULTI_FACE`
 
 Check the `.env.example` file for the required variables
 
