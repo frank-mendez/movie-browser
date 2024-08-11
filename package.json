@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "prepare": "husky",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@emotion/styled": "^11.13.0",
@@ -29,6 +30,8 @@
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@tailwindcss/typography": "^0.5.13",
     "@tanstack/eslint-plugin-query": "^5.51.15",
     "@testing-library/dom": "^10.4.0",
