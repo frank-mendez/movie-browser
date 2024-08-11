@@ -1,4 +1,4 @@
-import { TvShowParams, TvShowResponse } from "../../../types/tvShow.ts";
+import {TvShowDetailResponse, TvShowParams, TvShowResponse} from "../../../types/tvShow.ts";
 import { axios } from "../../../config/axios.ts";
 
 export const getTvShows = (params: TvShowParams): Promise<TvShowResponse> => {
@@ -6,4 +6,8 @@ export const getTvShows = (params: TvShowParams): Promise<TvShowResponse> => {
   return axios
     .get(`/tv/${tvShowParams}?language=en-US&page=${page}`)
     .then((response) => response.data as TvShowResponse);
+};
+
+export const getTvShowDetail = (id: string): Promise<TvShowDetailResponse> => {
+  return axios.get(`/tv/${id}?language=en-US`).then((response) => response.data);
 };
