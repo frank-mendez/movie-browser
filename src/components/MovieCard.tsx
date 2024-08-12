@@ -39,7 +39,7 @@ const MovieCard = ({ movies }: { movies: Movie[] }) => {
                   ? DateTime.fromISO(releaseDate).toFormat("DDD")
                   : ""}
               </p>
-              <div className='w-12 h-12'>
+              <div data-testid='circular-progress-element' className='w-12 h-12'>
                 <CircularProgressbar styles={buildStyles({
                     textSize: '25px',
                     pathColor: rating >= 70 ? '#10B981' : rating >= 40 ? '#F59E0B' : '#EF4444',
