@@ -43,6 +43,6 @@ describe("MovieCard", () => {
 
     expect(screen.getByText("A Quiet Place: Day One")).toBeInTheDocument();
     expect(screen.getByText("Release Date: June 26, 2024")).toBeInTheDocument();
-    expect(screen.getByText("Vote average: 7")).toBeInTheDocument();
+    expect(screen.getByTestId("circular-progress-element")).toBeInTheDocument();
   });
 });
