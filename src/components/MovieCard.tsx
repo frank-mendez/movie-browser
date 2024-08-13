@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
 
-const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType: MediaTypeEnum }) => {
+const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTypeEnum }) => {
   const navigate = useNavigate();
   const handleClick = (id: string, mediaType: string) => {
     if (mediaType === "movie") {
