@@ -1,13 +1,14 @@
 import AppLayout from "../../layout/AppLayout.tsx";
-import { TvShowTabInterface } from "../../types";
-import { TvShowParamsEnum, TvShowTabEnum } from "../../enums";
+import {TvShowTabInterface} from "../../types";
+import {TvShowParamsEnum, TvShowTabEnum} from "../../enums";
 import SearchBar from "../../components/SearchBar.tsx";
 import Loading from "../../components/Loading.tsx";
 import MovieCard from "../../components/MovieCard.tsx";
 import SearchPagination from "../search/SearchPagination.tsx";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useTvShowQuery } from "../../api/tv-show/query/useTvShowQuery.ts";
+import {useState} from "react";
+import {useSearchParams} from "react-router-dom";
+import {useTvShowQuery} from "../../api/tv-show/query/useTvShowQuery.ts";
+import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
 
 const TvShow = () => {
   const [search, setSearch] = useSearchParams();
@@ -69,7 +70,7 @@ const TvShow = () => {
         {isPending && <Loading />}
         <div className="grid grid-cols-5 gap-6 items-center">
           {data && data?.results.length > 0 && (
-            <MovieCard movies={data.results} />
+            <MovieCard mediaType={MediaTypeEnum.TV} movies={data.results} />
           )}
         </div>
         <div className="flex flex-row m-auto items-center my-10">

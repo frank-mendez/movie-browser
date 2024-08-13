@@ -16,6 +16,7 @@ import SearchMovieResult from "./SearchMovieResult.tsx";
 import SearchPeopleResult from "./SearchPeopleResult.tsx";
 import SearchKeywordResult from "./SearchKeywordResult.tsx";
 import SearchCompanyResult from "./SearchCompanyResult.tsx";
+import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
 
 const Search = () => {
   const [search, setSearch] = useSearchParams();
@@ -132,6 +133,7 @@ const Search = () => {
               data={movieData}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
+              mediaType={MediaTypeEnum.MOVIE}
             />
           )}
           {currentSearchTab === SearchTabEnums.TV_SHOWS && (
@@ -140,6 +142,7 @@ const Search = () => {
               data={tvShowData}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
+              mediaType={MediaTypeEnum.TV}
             />
           )}
           {currentSearchTab === SearchTabEnums.PEOPLE && (
@@ -148,6 +151,7 @@ const Search = () => {
               handlePageChange={handlePageChange}
               data={peopleData}
               currentPage={currentPage}
+              mediaType={MediaTypeEnum.PERSON}
             />
           )}
           {currentSearchTab === SearchTabEnums.COLLECTIONS && (
@@ -156,6 +160,7 @@ const Search = () => {
               data={collectionData}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
+              mediaType={MediaTypeEnum.COLLECTION}
             />
           )}
           {currentSearchTab === SearchTabEnums.KEYWORDS && (
@@ -164,6 +169,7 @@ const Search = () => {
               data={keywordData}
               handlePageChange={handlePageChange}
               currentPage={currentPage}
+              mediaType={MediaTypeEnum.KEYWORD}
             />
           )}
           {currentSearchTab === SearchTabEnums.COMPANIES && (
@@ -172,6 +178,7 @@ const Search = () => {
               data={companyData}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
+              mediaType={MediaTypeEnum.COMPANY}
             />
           )}
         </div>

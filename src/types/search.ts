@@ -1,6 +1,7 @@
 import { SearchTabEnums } from "../enums";
 import { MovieResponse } from "./movies.ts";
 import { PopularPeopleResponse } from "./people.ts";
+import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
 
 export type SearchResult = {
   page: number;
@@ -77,4 +78,5 @@ export type SearchMovieResultProps = {
   data?: SearchResult;
   currentPage: number;
   handlePageChange: (page: number) => void;
+  mediaType: MediaTypeEnum;
 };

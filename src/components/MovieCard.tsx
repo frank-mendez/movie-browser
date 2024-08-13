@@ -2,8 +2,9 @@ import { Movie } from "../types/movies.ts";
 import { DateTime } from "luxon";
 import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
 
-const MovieCard = ({ movies }: { movies: Movie[] }) => {
+const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTypeEnum }) => {
   const navigate = useNavigate();
   const handleClick = (id: string, mediaType: string) => {
     if (mediaType === "movie") {
@@ -21,7 +22,7 @@ const MovieCard = ({ movies }: { movies: Movie[] }) => {
 
         return (
           <div
-            onClick={() => handleClick(movie.id.toString(), movie.media_type)}
+            onClick={() => handleClick(movie.id.toString(), movie.media_type ?? mediaType)}
             key={movie.id}
             className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px]"
           >

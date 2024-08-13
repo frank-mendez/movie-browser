@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { describe, it, expect } from "vitest";
+import {describe, expect, it} from "vitest";
 import MovieCard from "../MovieCard.tsx";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {BrowserRouter} from "react-router-dom";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
 
 describe("MovieCard", () => {
   const mockMovies = [
@@ -32,7 +33,7 @@ describe("MovieCard", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <MovieCard movies={mockMovies} />
+          <MovieCard mediaType={MediaTypeEnum.MOVIE} movies={mockMovies} />
         </BrowserRouter>
       </QueryClientProvider>,
     );
