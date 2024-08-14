@@ -13,6 +13,7 @@ const movieKeys = {
   movieList: () => [...movieKeys.movies, "list"],
   movieCollection: (params: MovieParams) => [...movieKeys.movieList(), params],
   movieDetails: (id: string) => ["movieDetails", id],
+  movieCredits: (id: string) => ["movieCredits", id]
 };
 
 export default movieKeys;

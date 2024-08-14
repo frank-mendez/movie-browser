@@ -1,4 +1,5 @@
 import {
+  getMovieCredits,
   getMovieDetails,
   getMovies,
   getTrendingMovies,
@@ -32,3 +33,10 @@ export const useMovieDetailsQuery = (id: string) => {
     queryFn: () => getMovieDetails(id),
   });
 };
+
+export const useMovieCreditsQuery = (id: string) => {
+    return useQuery({
+        queryKey: movieKeys.movieCredits(id),
+        queryFn: () => getMovieCredits(id),
+    });
+}
