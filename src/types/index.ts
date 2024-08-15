@@ -12,7 +12,7 @@ import {
   SearchPaginationProps,
   SearchMovieResultProps,
 } from "./search.ts";
-import { TvShowTabInterface, TvShowDetailResponse } from "./tvShow.ts";
+import { TvShowTabInterface, TvShowDetailResponse, TvShowCreditsResponse } from "./tvShow.ts";
 import { PopularPeopleResponse, PopularPerson } from "./people.ts";
 
 export type {
@@ -29,5 +29,6 @@ export type {
   PopularPeopleResponse,
   PopularPerson,
   MoviesDetails,
-  TvShowDetailResponse
+  TvShowDetailResponse,
+  TvShowCreditsResponse
 };
