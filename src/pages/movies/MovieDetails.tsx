@@ -14,8 +14,6 @@ const MovieDetails = () => {
     const movieImage = import.meta.env.VITE_TMDB_IMAGE_URL + data?.poster_path;
     const rating = data ? data.vote_average * 10 : 0;
 
-    console.log('movieCredits', movieCredits);
-
     return (
         <AppLayout>
             <div className='relative'>

@@ -8,6 +8,7 @@ const tvShowKeys = {
     params,
   ],
     tvShowDetail: (id: string) => ['tv-show-details', id],
+  tvShowCredits: (id: string) => ['tv-show-credits', id],
 };
 
 export default tvShowKeys;
