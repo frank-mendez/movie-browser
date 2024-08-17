@@ -13,7 +13,7 @@ import {
   SearchMovieResultProps,
 } from "./search.ts";
 import { TvShowTabInterface, TvShowDetailResponse, TvShowCreditsResponse } from "./tvShow.ts";
-import { PopularPeopleResponse, PopularPerson } from "./people.ts";
+import { PopularPeopleResponse, PopularPerson, PersonDetailsResponse, PersonExternalIds } from "./people.ts";
 
 export type {
   MovieResponse,
@@ -30,5 +30,7 @@ export type {
   PopularPerson,
   MoviesDetails,
   TvShowDetailResponse,
-  TvShowCreditsResponse
+  TvShowCreditsResponse,
+  PersonDetailsResponse,
+  PersonExternalIds
 };

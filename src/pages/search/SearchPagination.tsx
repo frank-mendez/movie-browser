@@ -8,7 +8,7 @@ const SearchPagination = ({
 }: SearchPaginationProps) => {
   const [search] = useSearchParams();
   return (
-    <div className="join m-auto">
+    <div data-testid='search-pagination-element' className="join m-auto">
       {data && data?.total_pages > 1 && (
         <>
           {currentPage > 0 && (

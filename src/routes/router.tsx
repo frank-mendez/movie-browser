@@ -8,6 +8,7 @@ import NotFound from "../pages/not-found/NotFound.tsx";
 import Search from "../pages/search/Search.tsx";
 import MovieDetails from "../pages/movies/MovieDetails.tsx";
 import TvShowDetails from "../pages/tv-shows/TvShowDetails.tsx";
+import PersonDetails from "../pages/people/PersonDetails.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
   {
     path: "/people",
     element: <People />,
+  },
+  {
+    path: '/people/:personId',
+    element: <PersonDetails />,
   },
   {
     path: "/tv-shows",
