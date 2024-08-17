@@ -21,10 +21,10 @@ const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTy
         const rating = movie.vote_average * 10;
 
         return (
-          <div
+          <button
             onClick={() => handleClick(movie.id.toString(), movie.media_type ?? mediaType)}
             key={movie.id}
-            className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px]"
+            className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px] text-left"
           >
             <figure>
               <img
@@ -50,7 +50,7 @@ const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTy
                 })} maxValue={100} value={rating} text={`${(movie.vote_average * 10).toFixed(0)}%`} />
               </div>
             </div>
-          </div>
+          </button>
         );
       })}
     </>

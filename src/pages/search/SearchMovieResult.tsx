@@ -21,7 +21,7 @@ const SearchMovieResult = ({
         }
     };
   return (
-    <div className="flex flex-col flex-1 gap-6 cursor-pointer">
+    <div data-testid='search-movie-result-element' className="flex flex-col flex-1 gap-6 cursor-pointer">
       {loading && <Loading />}
       {data?.results.map((movie) => {
         const releaseDate =

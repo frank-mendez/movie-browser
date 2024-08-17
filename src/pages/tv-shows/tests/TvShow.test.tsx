@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import TvShow from "../TvShow.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-describe("Home component", () => {
+describe("Tv Show Component", () => {
   const queryClient = new QueryClient();
   const tvShowComponent = () => {
     render(

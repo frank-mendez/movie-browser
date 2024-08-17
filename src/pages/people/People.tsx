@@ -1,6 +1,6 @@
 import AppLayout from "../../layout/AppLayout.tsx";
 import SearchBar from "../../components/SearchBar.tsx";
-import { useSearchParams } from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import { usePeopleQuery } from "../../api/people/query/usePeopleQuery.ts";
 import Loading from "../../components/Loading.tsx";
 import SearchPagination from "../search/SearchPagination.tsx";
@@ -9,6 +9,7 @@ import { truncateString } from "../../utils/utils.ts";
 const People = () => {
   const [search, setSearch] = useSearchParams();
   const currentPage = parseInt(search.get("page") || "1") - 1;
+  const navigate = useNavigate();
 
   const handlePageChange = (page: number) => {
     setSearch({ page: page.toString() });
@@ -25,9 +26,12 @@ const People = () => {
           {data &&
             data?.results.length > 0 &&
             data.results.map((person) => (
-              <div
+              <button
                 key={person.id}
-                className="card bg-base-300 w-500 shadow-xl cursor-pointer hover:animate-pulse"
+                onClick={() => {
+                  navigate(`/people/${person.id}`);
+                }}
+                className="card bg-base-300 w-500 shadow-xl cursor-pointer hover:animate-pulse text-left"
               >
                 <figure>
                   <img
@@ -49,7 +53,7 @@ const People = () => {
                     )}
                   </p>
                 </div>
-              </div>
+              </button>
             ))}
         </div>
         <div className="flex flex-row m-auto items-center my-10">

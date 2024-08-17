@@ -10,7 +10,7 @@ const SearchPeopleResult = ({
   handlePageChange,
 }: SearchMovieResultProps) => {
   return (
-    <div className="flex flex-col flex-1 gap-6 cursor-pointer">
+    <div data-testid='search-result-people-element' className="flex flex-col flex-1 gap-6 cursor-pointer">
       {loading && <Loading />}
       {data?.results.map((movie) => {
         const imgSrc = hasValidImageExtension(movie.profile_path)
