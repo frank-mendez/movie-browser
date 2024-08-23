@@ -4,6 +4,7 @@ import {useMovieCreditsQuery, useMovieDetailsQuery} from "../../api/movies/query
 import Loading from "../../components/Loading.tsx";
 import ReactCountryFlag from "react-country-flag";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
+import PeopleCard from "../../components/PeopleCard.tsx";
 
 const MovieDetails = () => {
     window.scrollTo(0, 0);
@@ -52,56 +53,36 @@ const MovieDetails = () => {
                 </div>
                 <h1 className='font-bold text-5xl bg-base-100 text-center mt-10'>Casts</h1>
                 <div className='grid grid-cols-8 gap-4 p-10'>
-                    {movieCredits?.cast.slice(0, 8).map((cast) => (
-                        <button onClick={() => {
-                            navigate(`/people/${cast.id}`);
-                        }} key={cast.id}
-                                className="card bg-base-300 shadow-xl cursor-pointer hover:animate-pulse text-left">
-                            <figure>
-                                <img
-                                    src={import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path}
-                                    alt="cast"/>
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{cast.name}</h2>
-                                <p>{cast.character}</p>
-                            </div>
-                        </button>
-                    ))}
-                    {movieCredits?.cast.slice(9, 17).map((cast) => (
-                        <button onClick={() => {
-                            navigate(`/people/${cast.id}`);
-                        }} key={cast.id}
-                                className="card bg-base-300 shadow-xl cursor-pointer hover:animate-pulse text-left">
-                            <figure>
-                                <img
-                                    src={import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path}
-                                    alt="cast"/>
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{cast.name}</h2>
-                                <p>{cast.character}</p>
-                            </div>
-                        </button>
-                    ))}
+                    {movieCredits?.cast.slice(0, 8).map((cast) => {
+                        const genderImage = cast.gender === 1 ?
+                            '/assets/images/man.png' : '/assets/images/woman.png';
+                        const imageSrc = cast.profile_path ? import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path : genderImage
+                        return (
+                            <PeopleCard onClick={() => navigate(`/people/${cast.id}`)} key={cast.id} name={cast.name}
+                                        character={cast.character} imageSrc={imageSrc}/>
+                        )
+                    })}
+                    {movieCredits?.cast.slice(9, 17).map((cast) =>  {
+                        const genderImage = cast.gender === 1 ?
+                            '/assets/images/man.png' : '/assets/images/woman.png';
+                        const imageSrc = cast.profile_path ? import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path : genderImage
+                        return (
+                            <PeopleCard onClick={() => navigate(`/people/${cast.id}`)} key={cast.id} name={cast.name}
+                                        character={cast.character} imageSrc={imageSrc}/>
+                        )
+                    })}
                 </div>
                 <h1 className='font-bold text-5xl bg-base-100 text-center mt-10'>Crew</h1>
                 <div className='grid grid-cols-8 gap-4 p-10'>
-                    {movieCredits?.crew.slice(0, 8).map((cast) => (
-                        <button onClick={() => {
-                            navigate(`/people/${cast.id}`);
-                        }} key={cast.id} className="card bg-base-300 shadow-xl cursor-pointer hover:animate-pulse">
-                            <figure>
-                                <img
-                                    src={import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path}
-                                    alt="cast"/>
-                            </figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{cast.name}</h2>
-                                <p>{cast.department}</p>
-                            </div>
-                        </button>
-                    ))}
+                    {movieCredits?.crew.slice(0, 8).map((cast) =>  {
+                        const genderImage = cast.gender === 2 ?
+                            '/assets/images/man.png' : '/assets/images/woman.png';
+                        const imageSrc = cast.profile_path ? import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path : genderImage
+                        return (
+                            <PeopleCard onClick={() => navigate(`/people/${cast.id}`)} key={cast.id} name={cast.name}
+                                        character={cast.department} imageSrc={imageSrc}/>
+                        )
+                    })}
                 </div>
             </div>
         </AppLayout>

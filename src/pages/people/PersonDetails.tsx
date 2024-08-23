@@ -9,7 +9,9 @@ const PersonDetails = () => {
     window.scrollTo(0, 0);
     const { personId } = useParams<{ personId: string }>();
     const {data, isPending} = usePersonDetailsQuery(personId ?? "");
-    const imgScr = import.meta.env.VITE_TMDB_IMAGE_URL + data?.profile_path;
+    const genderImage = data?.gender === 2 ?
+        '/assets/images/man.png' : '/assets/images/woman.png';
+    const imgScr = data?.profile_path ? import.meta.env.VITE_TMDB_IMAGE_URL + data.profile_path : genderImage
 
     return (
         <AppLayout>
