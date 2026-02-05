@@ -1,4 +1,5 @@
 # Movie browser
+
 Movie Browser — TMDB-powered React App
 
 A modern movie discovery web application built with React and TypeScript, designed to explore, search, and browse movies using the TMDB API. This project focuses on clean architecture, performance, and real-world frontend best practices.
@@ -11,16 +12,20 @@ It’s intentionally designed as a production-style frontend, not a tutorial dem
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-
 ## Features
- - Browse popular and trending movies
- - Search movies with debounced input
- - Movie detail pages with metadata
- - Client-side caching and request deduplication using React Query
- - Responsive layout with Tailwind CSS
- - Unit tests for core components and logic
 
- ## Architecture & Decisions
+- Browse popular and trending movies
+- Search movies with debounced input
+- Movie detail pages with metadata
+- Client-side caching and request deduplication using React Query
+- Responsive layout with Tailwind CSS
+- Unit tests for core components and logic
+
+## Roadmap
+
+See [roadmap.md](roadmap.md) for upcoming enhancements and planned phases.
+
+## Architecture & Decisions
 
 React Query for data fetching to reduce unnecessary API calls and manage cache consistency
 
@@ -29,7 +34,6 @@ Component-driven structure for reuse and maintainability
 Typed API responses to prevent runtime errors
 
 Clear separation between UI, hooks, and API layers
-
 
 ## Environment Variables
 
@@ -41,7 +45,6 @@ To run this project, you will need to add the following environment variables to
 `VITE_TMDB_IMAGE_MULTI_FACE`
 
 Check the `.env.example` file for the required variables
-
 
 ## Run Locally
 
@@ -68,7 +71,6 @@ Start the server
 ```bash
   npm run dev
 ```
-
 
 ## Running Tests
 
