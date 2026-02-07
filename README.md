@@ -21,6 +21,12 @@ It’s intentionally designed as a production-style frontend, not a tutorial dem
 - Responsive layout with Tailwind CSS
 - Unit tests for core components and logic
 
+## Screenshots
+
+![Home page](screenshots/Movie-Browser-02-08-2026_12_47_AM.png)
+![Search results](screenshots/Movie-Browser-02-08-2026_12_48_AM.png)
+![Details view](<screenshots/Movie-Browser-02-08-2026_12_48_AM%20(1).png>)
+
 ## Roadmap
 
 See [roadmap.md](roadmap.md) for upcoming enhancements and planned phases.
