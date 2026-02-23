@@ -1,14 +1,14 @@
 import AppLayout from "../../layout/AppLayout.tsx";
-import {MovieParamsEnum, MovieTabEnum} from "../../enums";
-import {MovieTabInterface} from "../../types";
-import {useState} from "react";
+import { MovieParamsEnum, MovieTabEnum } from "../../enums";
+import { MovieTabInterface } from "../../types";
+import { useState } from "react";
 import Loading from "../../components/Loading.tsx";
 import SearchBar from "../../components/SearchBar.tsx";
-import {useMoviesQuery} from "../../api/movies/query/useMovieQuery.ts";
+import { useMoviesQuery } from "../../api/movies/query/useMovieQuery.ts";
 import MovieCard from "../../components/MovieCard.tsx";
 import SearchPagination from "../search/SearchPagination.tsx";
-import {useSearchParams} from "react-router-dom";
-import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
+import { useSearchParams } from "react-router-dom";
+import { MediaTypeEnum } from "../../enums/MovieTabEnum.ts";
 
 const Movies = () => {
   const [search, setSearch] = useSearchParams();
@@ -53,7 +53,7 @@ const Movies = () => {
 
   return (
     <AppLayout>
-      <div data-testid="movies-element" className="container m-auto py-6">
+      <div data-testid="movies-element" className="container m-auto p-5">
         <SearchBar />
         <div role="tablist" className="tabs tabs-boxed my-10">
           {movieTabs.map((tab) => (
@@ -68,7 +68,7 @@ const Movies = () => {
           ))}
         </div>
         {isPending && <Loading />}
-        <div className="grid grid-cols-5 gap-6 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 items-center ">
           {data && data?.results.length > 0 && (
             <MovieCard mediaType={MediaTypeEnum.MOVIE} movies={data.results} />
           )}
