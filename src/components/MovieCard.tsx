@@ -1,8 +1,8 @@
 import { Movie } from "../types/movies.ts";
 import { DateTime } from "luxon";
 import { useNavigate } from "react-router-dom";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
+import RatingProgress from "./RatingProgress.tsx";
 
 const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTypeEnum }) => {
   const navigate = useNavigate();
@@ -40,15 +40,7 @@ const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTy
                   ? DateTime.fromISO(releaseDate).toFormat("DDD")
                   : ""}
               </p>
-              <div data-testid='circular-progress-element' className='w-12 h-12'>
-                <CircularProgressbar styles={buildStyles({
-                    textSize: '25px',
-                    pathColor: rating >= 70 ? '#10B981' : rating >= 40 ? '#F59E0B' : '#EF4444',
-                    textColor: rating >= 70 ? '#10B981' : rating >= 40 ? '#F59E0B' : '#EF4444',
-                    trailColor:  '#374151',
-
-                })} maxValue={100} value={rating} text={`${(movie.vote_average * 10).toFixed(0)}%`} />
-              </div>
+              <RatingProgress rating={rating} className="w-12 h-12" />
             </div>
           </button>
         );
