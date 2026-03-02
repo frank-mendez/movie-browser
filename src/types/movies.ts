@@ -74,6 +74,10 @@ export interface Genre {
   name: string;
 }
 
+export interface MovieGenreListResponse {
+  genres: Genre[];
+}
+
 export interface ProductionCompany {
   id: number;
   logo_path?: string;

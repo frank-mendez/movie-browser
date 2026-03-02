@@ -4,7 +4,20 @@ import { useNavigate } from "react-router-dom";
 import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
 import RatingProgress from "./RatingProgress.tsx";
 
-const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTypeEnum }) => {
+type GenreMapByType = {
+  movie?: Record<number, string>;
+  tv?: Record<number, string>;
+};
+
+const MovieCard = ({
+  movies,
+  mediaType,
+  genreMapByType,
+}: {
+  movies: Movie[];
+  mediaType?: MediaTypeEnum;
+  genreMapByType?: GenreMapByType;
+}) => {
   const navigate = useNavigate();
   const handleClick = (id: string, mediaType: string) => {
     if (mediaType === "movie") {
@@ -19,10 +32,20 @@ const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTy
       {movies.map((movie) => {
         const releaseDate = movie.release_date ?? movie.first_air_date
         const rating = movie.vote_average * 10;
+        const currentMediaType = movie.media_type ?? mediaType;
+        const genreMap =
+          currentMediaType === "tv"
+            ? genreMapByType?.tv
+            : genreMapByType?.movie;
+        const genreNames = movie.genre_ids
+          .map((genreId) => genreMap?.[genreId])
+          .filter(Boolean)
+          .slice(0, 3)
+          .join(", ");
 
         return (
           <button
-            onClick={() => handleClick(movie.id.toString(), movie.media_type ?? mediaType)}
+            onClick={() => handleClick(movie.id.toString(), currentMediaType)}
             key={movie.id}
             className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px] text-left"
           >
@@ -40,6 +63,7 @@ const MovieCard = ({ movies, mediaType }: { movies: Movie[], mediaType?: MediaTy
                   ? DateTime.fromISO(releaseDate).toFormat("DDD")
                   : ""}
               </p>
+              <p>{genreNames}</p>
               <RatingProgress rating={rating} className="w-12 h-12" />
             </div>
           </button>

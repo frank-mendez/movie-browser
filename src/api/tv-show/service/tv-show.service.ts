@@ -1,4 +1,10 @@
-import {TvShowCreditsResponse, TvShowDetailResponse, TvShowParams, TvShowResponse} from "../../../types/tvShow.ts";
+import {
+  TvShowCreditsResponse,
+  TvShowDetailResponse,
+  TvShowGenreListResponse,
+  TvShowParams,
+  TvShowResponse,
+} from "../../../types/tvShow.ts";
 import { axios } from "../../../config/axios.ts";
 
 export const getTvShows = (params: TvShowParams): Promise<TvShowResponse> => {
@@ -15,3 +21,9 @@ export const getTvShowDetail = (id: string): Promise<TvShowDetailResponse> => {
 export const getTvShowCredits = (id: string): Promise<TvShowCreditsResponse> => {
     return axios.get(`/tv/${id}/aggregate_credits`).then((response) => response.data);
 }
+
+export const getTvShowGenres = (): Promise<TvShowGenreListResponse> => {
+  return axios
+    .get(`/genre/tv/list?language=en-US`)
+    .then((response) => response.data as TvShowGenreListResponse);
+};

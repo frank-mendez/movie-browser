@@ -1,10 +1,10 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import {describe, expect, it} from "vitest";
+import { describe, expect, it } from "vitest";
 import MovieCard from "../MovieCard.tsx";
-import {BrowserRouter} from "react-router-dom";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MediaTypeEnum } from "../../enums/MovieTabEnum.ts";
 
 describe("MovieCard", () => {
   const mockMovies = [
@@ -23,7 +23,7 @@ describe("MovieCard", () => {
       popularity: 1899.794,
       release_date: "2024-06-26",
       video: false,
-      vote_average: 7.0,
+      vote_average: 7,
       vote_count: 724,
     },
   ];
@@ -33,7 +33,17 @@ describe("MovieCard", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <MovieCard mediaType={MediaTypeEnum.MOVIE} movies={mockMovies} />
+          <MovieCard
+            mediaType={MediaTypeEnum.MOVIE}
+            movies={mockMovies}
+            genreMapByType={{
+              movie: {
+                27: "Horror",
+                878: "Science Fiction",
+                53: "Thriller",
+              },
+            }}
+          />
         </BrowserRouter>
       </QueryClientProvider>,
     );
@@ -44,6 +54,9 @@ describe("MovieCard", () => {
 
     expect(screen.getByText("A Quiet Place: Day One")).toBeInTheDocument();
     expect(screen.getByText("Release Date: June 26, 2024")).toBeInTheDocument();
+    expect(
+      screen.getByText("Horror, Science Fiction, Thriller"),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("circular-progress-element")).toBeInTheDocument();
   });
 });

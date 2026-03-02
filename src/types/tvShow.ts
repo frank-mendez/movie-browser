@@ -67,6 +67,10 @@ export interface Genre {
   name: string
 }
 
+export interface TvShowGenreListResponse {
+  genres: Genre[]
+}
+
 export interface LastEpisodeToAir {
   id: number
   name: string

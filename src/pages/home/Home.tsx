@@ -1,10 +1,14 @@
 import AppLayout from "../../layout/AppLayout.tsx";
-import { useTrendingMoviesQuery } from "../../api/movies/query/useMovieQuery.ts";
+import {
+  useMovieGenresQuery,
+  useTrendingMoviesQuery,
+} from "../../api/movies/query/useMovieQuery.ts";
 import Loading from "../../components/Loading.tsx";
 import MovieCard from "../../components/MovieCard.tsx";
 import { useState } from "react";
 import { TrendingParamsEnum, TrendingTabEnum } from "../../enums";
 import SearchBar from "../../components/SearchBar.tsx";
+import { useTvShowGenresQuery } from "../../api/tv-show/query/useTvShowQuery.ts";
 
 const Home = () => {
   const [trendingTab, setTrendingTab] = useState<TrendingTabEnum>(
@@ -17,6 +21,17 @@ const Home = () => {
         ? TrendingParamsEnum.TODAY
         : TrendingParamsEnum.THIS_WEEK,
   });
+
+  const { data: movieGenresData } = useMovieGenresQuery();
+  const { data: tvGenresData } = useTvShowGenresQuery();
+
+  const movieGenres = Object.fromEntries(
+    (movieGenresData?.genres ?? []).map((genre) => [genre.id, genre.name]),
+  );
+
+  const tvGenres = Object.fromEntries(
+    (tvGenresData?.genres ?? []).map((genre) => [genre.id, genre.name]),
+  );
 
   const onChangeTrending = (trending: TrendingTabEnum) => {
     setTrendingTab(trending);
@@ -47,7 +62,10 @@ const Home = () => {
         {isPending && <Loading />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 items-center">
           {data && data?.results.length > 0 && (
-            <MovieCard movies={data.results} />
+            <MovieCard
+              movies={data.results}
+              genreMapByType={{ movie: movieGenres, tv: tvGenres }}
+            />
           )}
         </div>
       </div>
