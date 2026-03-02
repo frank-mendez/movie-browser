@@ -1,7 +1,7 @@
 import { Movie } from "../types/movies.ts";
 import { DateTime } from "luxon";
 import { useNavigate } from "react-router-dom";
-import {MediaTypeEnum} from "../enums/MovieTabEnum.ts";
+import { MediaTypeEnum } from "../enums/MovieTabEnum.ts";
 import RatingProgress from "./RatingProgress.tsx";
 
 type GenreMapByType = {
@@ -30,14 +30,21 @@ const MovieCard = ({
   return (
     <>
       {movies.map((movie) => {
-        const releaseDate = movie.release_date ?? movie.first_air_date
+        const releaseDate = movie.release_date ?? movie.first_air_date;
         const rating = movie.vote_average * 10;
         const currentMediaType = movie.media_type ?? mediaType;
+        const isSupportedMediaType =
+          currentMediaType === "movie" || currentMediaType === "tv";
+
+        if (!isSupportedMediaType) {
+          return null;
+        }
+
         const genreMap =
           currentMediaType === "tv"
             ? genreMapByType?.tv
             : genreMapByType?.movie;
-        const genreNames = movie.genre_ids
+        const genreNames = (movie.genre_ids ?? [])
           .map((genreId) => genreMap?.[genreId])
           .filter(Boolean)
           .slice(0, 3)
