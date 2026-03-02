@@ -34,7 +34,11 @@ const MovieDetails = () => {
           <div className="absolute inset-0 bg-base-100 opacity-70"></div>
           {isPending && <Loading />}
           <div className="hero-content flex-col lg:flex-row relative z-10">
-            <img src={movieImage} className="w-96 rounded-lg shadow-2xl" />
+            <img
+              src={movieImage}
+              alt={data?.title ?? "Movie poster"}
+              className="w-96 rounded-lg shadow-2xl"
+            />
             <div>
               <RatingProgress rating={rating} className="w-12 h-12 mb-4" />
 

@@ -4,7 +4,10 @@ import { MovieTabInterface } from "../../types";
 import { useState } from "react";
 import Loading from "../../components/Loading.tsx";
 import SearchBar from "../../components/SearchBar.tsx";
-import { useMoviesQuery } from "../../api/movies/query/useMovieQuery.ts";
+import {
+  useMovieGenresQuery,
+  useMoviesQuery,
+} from "../../api/movies/query/useMovieQuery.ts";
 import MovieCard from "../../components/MovieCard.tsx";
 import SearchPagination from "../search/SearchPagination.tsx";
 import { useSearchParams } from "react-router-dom";
@@ -32,19 +35,25 @@ const Movies = () => {
     },
   ];
 
-  const [curentTab, setCurrentTab] = useState<MovieParamsEnum>(
+  const [currentTab, setCurrentTab] = useState<MovieParamsEnum>(
     MovieParamsEnum.POPULAR,
   );
 
   const { data, isPending } = useMoviesQuery({
-    params: curentTab,
+    params: currentTab,
     page: search.get("page") || "1",
   });
+
+  const { data: movieGenresData } = useMovieGenresQuery();
+  const movieGenres = Object.fromEntries(
+    (movieGenresData?.genres ?? []).map((genre) => [genre.id, genre.name]),
+  );
+
   const handlePageChange = (page: number) => {
     setSearch({ page: page.toString() });
     window.scrollTo(0, 0);
   };
-  const currentPage = parseInt(search.get("page") || "1") - 1;
+  const currentPage = Number.parseInt(search.get("page") || "1", 10) - 1;
 
   const handleTabChange = (value: MovieParamsEnum) => {
     setSearch({ page: "1" });
@@ -60,7 +69,7 @@ const Movies = () => {
             <button
               key={tab.value}
               role="tab"
-              className={`tab ${curentTab === tab.value ? "tab-active" : ""}`}
+              className={`tab ${currentTab === tab.value ? "tab-active" : ""}`}
               onClick={() => handleTabChange(tab.value)}
             >
               {tab.label}
@@ -70,7 +79,11 @@ const Movies = () => {
         {isPending && <Loading />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 items-center ">
           {data && data?.results.length > 0 && (
-            <MovieCard mediaType={MediaTypeEnum.MOVIE} movies={data.results} />
+            <MovieCard
+              mediaType={MediaTypeEnum.MOVIE}
+              movies={data.results}
+              genreMapByType={{ movie: movieGenres }}
+            />
           )}
         </div>
         <div className="flex flex-row m-auto items-center my-10">

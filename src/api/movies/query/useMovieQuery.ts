@@ -1,6 +1,7 @@
 import {
   getMovieCredits,
   getMovieDetails,
+  getMovieGenres,
   getMovies,
   getTrendingMovies,
 } from "../service/movies.service.ts";
@@ -40,3 +41,10 @@ export const useMovieCreditsQuery = (id: string) => {
         queryFn: () => getMovieCredits(id),
     });
 }
+
+export const useMovieGenresQuery = () => {
+  return useQuery({
+    queryKey: movieKeys.movieGenres(),
+    queryFn: getMovieGenres,
+  });
+};

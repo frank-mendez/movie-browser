@@ -1,7 +1,11 @@
 import { axios } from "../../../config/axios.ts";
 import { MovieResponse, MoviesDetails } from "../../../types";
 import { TrendingParamsEnum } from "../../../enums";
-import {MovieCreditsResponse, MovieParams} from "../../../types/movies.ts";
+import {
+  MovieCreditsResponse,
+  MovieGenreListResponse,
+  MovieParams,
+} from "../../../types/movies.ts";
 
 export const getTrendingMovies = (
   params: TrendingParamsEnum,
@@ -29,3 +33,9 @@ export const getMovieCredits = (id: string): Promise<MovieCreditsResponse> => {
         .get(`/movie/${id}/credits?language=en-US`)
         .then((response) => response.data as MovieCreditsResponse);
 }
+
+export const getMovieGenres = (): Promise<MovieGenreListResponse> => {
+  return axios
+    .get(`/genre/movie/list?language=en-US`)
+    .then((response) => response.data as MovieGenreListResponse);
+};
