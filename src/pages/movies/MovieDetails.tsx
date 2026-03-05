@@ -68,6 +68,7 @@ const MovieDetails = () => {
               <PeopleCard
                 onClick={() => navigate(`/people/${cast.id}`)}
                 key={cast.id}
+                gender={cast.gender}
                 name={cast.name}
                 character={cast.character}
                 imageSrc={imageSrc}
@@ -86,6 +87,7 @@ const MovieDetails = () => {
               <PeopleCard
                 onClick={() => navigate(`/people/${cast.id}`)}
                 key={cast.id}
+                gender={cast.gender}
                 name={cast.name}
                 character={cast.character}
                 imageSrc={imageSrc}
@@ -109,6 +111,7 @@ const MovieDetails = () => {
               <PeopleCard
                 onClick={() => navigate(`/people/${cast.id}`)}
                 key={cast.id}
+                gender={cast.gender}
                 name={cast.name}
                 character={cast.department}
                 imageSrc={imageSrc}
