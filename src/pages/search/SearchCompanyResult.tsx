@@ -11,8 +11,7 @@ const SearchCompanyResult = ({
   return (
     <div className={`${loading ? "skeleton w-52 h-12" : ""}`}>
       <div className="grid grid-cols-4 gap-4 mb-10">
-        {data &&
-          data.results.map((result) => (
+        {data?.results.map((result) => (
             <div
               key={result.id}
               className="rounded-btn bg-base-200 p-4 cursor-pointer"
@@ -21,13 +20,16 @@ const SearchCompanyResult = ({
                 <img
                   src={`https://image.tmdb.org/t/p/w500${result.logo_path}`}
                   alt={result.name}
-                  className="w-auto h-auto"
+                  className="hidden md:block w-auto h-auto"
                 />
               )}
-              <p> Name: {result.name}</p>
-              <p> Origin Country: {result.origin_country ?? "N/A"}</p>{" "}
+              <h2 className="card-title">{result.name}</h2>
+              <p className="hidden md:block">Origin Country: {result.origin_country ?? "N/A"}</p>{" "}
               {result.origin_country && (
-                <ReactCountryFlag countryCode={result.origin_country} />
+                <ReactCountryFlag
+                  className="hidden md:inline-block"
+                  countryCode={result.origin_country}
+                />
               )}
             </div>
           ))}
