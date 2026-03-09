@@ -3,6 +3,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.tsx";
 
 const Header = () => {
   const location = useLocation();
+
   return (
     <div data-testid="header-element" className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -30,8 +31,8 @@ const Header = () => {
               </svg>
             </label>
           </div>
-          <div className="container m-auto">
-            <div className="mx-2 navbar-start px-2">
+          <div className="container m-auto flex w-full items-center">
+            <div className="mx-2 navbar-start hidden px-2 lg:flex">
               <Link
                 className={location.pathname === "/" ? "active" : ""}
                 to="/"
@@ -73,13 +74,16 @@ const Header = () => {
                 </li>
               </ul>
             </div>
+            <div className="navbar-end ml-auto flex lg:hidden">
+              <ThemeSwitcher />
+            </div>
             <div className="navbar-end hidden lg:flex font-dm-sans">
               <ThemeSwitcher />
             </div>
           </div>
         </div>
       </div>
-      <div data-testid="drawer-element" className="drawer-side">
+      <div data-testid="drawer-element" className="drawer-side z-50">
         <label
           htmlFor="my-drawer-3"
           aria-label="close sidebar"
@@ -87,6 +91,9 @@ const Header = () => {
         ></label>
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
           {/* Sidebar content here */}
+          <li>
+            <Link to="/">Home</Link>
+          </li>
           <li>
             <Link to="/movies">Movies</Link>
           </li>
