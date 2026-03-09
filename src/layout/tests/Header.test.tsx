@@ -29,6 +29,16 @@ describe("Header component", () => {
     expect(peopleLinks[0]).toBeInTheDocument();
   });
 
+  it("renders theme switcher for mobile and desktop layouts", () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    );
+
+    expect(screen.getAllByRole("checkbox")).toHaveLength(3);
+  });
+
   it("navigates to Movies page on click", async () => {
     render(
       <BrowserRouter>
@@ -38,7 +48,7 @@ describe("Header component", () => {
     const user = userEvent.setup();
     const moviesLinks = screen.getAllByText("Movies");
     await user.click(moviesLinks[0]); // Click the first 'Movies' link
-    expect(window.location.pathname).toBe("/movies");
+    expect(globalThis.location.pathname).toBe("/movies");
   });
 
   it("navigates to TV Shows page on click", async () => {
@@ -49,10 +59,10 @@ describe("Header component", () => {
     );
     const user = userEvent.setup();
     await user.click(screen.getByText("TV Shows"));
-    expect(window.location.pathname).toBe("/tv-shows");
+    expect(globalThis.location.pathname).toBe("/tv-shows");
     await user.click(screen.getByTestId("movie-link-element"));
-    expect(window.location.pathname).toBe("/movies");
+    expect(globalThis.location.pathname).toBe("/movies");
     await user.click(screen.getByTestId("people-link-element"));
-    expect(window.location.pathname).toBe("/people");
+    expect(globalThis.location.pathname).toBe("/people");
   });
 });
