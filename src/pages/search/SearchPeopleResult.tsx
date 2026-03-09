@@ -21,13 +21,13 @@ const SearchPeopleResult = ({
             key={movie.id}
             className="card card-side bg-base-200 shadow-xl w-full h-52 flex flex-row"
           >
-            <figure className="flex-none">
+            <figure className="hidden md:flex flex-none">
               <img className="h-full" src={imgSrc} alt="Movie" />
             </figure>
             <div className="card-body flex-1">
-              <p>{movie.original_name}</p>
-              <p>{movie.known_for_department}</p>
-              <p>
+              <h2 className="card-title">{movie.original_name}</h2>
+              <p className="hidden md:block">{movie.known_for_department}</p>
+              <p className="hidden md:block">
                 {movie.known_for
                   .map((item) => item.title ?? item.name ?? item.original_name)
                   .join(", ")}

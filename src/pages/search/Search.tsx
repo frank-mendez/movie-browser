@@ -16,7 +16,7 @@ import SearchMovieResult from "./SearchMovieResult.tsx";
 import SearchPeopleResult from "./SearchPeopleResult.tsx";
 import SearchKeywordResult from "./SearchKeywordResult.tsx";
 import SearchCompanyResult from "./SearchCompanyResult.tsx";
-import {MediaTypeEnum} from "../../enums/MovieTabEnum.ts";
+import { MediaTypeEnum } from "../../enums/MovieTabEnum.ts";
 
 const Search = () => {
   const [search, setSearch] = useSearchParams();
@@ -45,7 +45,7 @@ const Search = () => {
     setSearch({ page: page.toString(), query: search.get("query") || "" });
     window.scrollTo(0, 0);
   };
-  const currentPage = parseInt(search.get("page") || "1") - 1;
+  const currentPage = Number.parseInt(search.get("page") || "1") - 1;
 
   const handleTabChange = (value: SearchTabEnums) => {
     setSearch({ page: "1", query: search.get("query") || "" });
@@ -99,7 +99,7 @@ const Search = () => {
 
   return (
     <AppLayout>
-      <div className="container m-auto">
+      <div className="container m-auto p-5">
         <div className="flex flex-row gap-2 my-10">
           <input
             data-testid="search-input"
@@ -111,21 +111,23 @@ const Search = () => {
           />
           <button className="btn">Search</button>
         </div>
-        <div className="flex flex-row gap-4">
-          <div className="flex flex-col flex-none gap-4">
+        <div className="flex flex-col gap-4 lg:flex-row">
+          <div className="flex flex-col flex-none gap-4 lg:min-w-72">
             <h1 data-testid="search-result" className="text-4xl">
               Search Results
             </h1>
-            {SearchTabs.map((tab) => (
-              <SearchTab
-                title={tab.title}
-                loading={tab.loading}
-                onClick={tab.onClick}
-                count={tab.count}
-                isActive={tab.isActive}
-                key={tab.title}
-              />
-            ))}
+            <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
+              {SearchTabs.map((tab) => (
+                <SearchTab
+                  title={tab.title}
+                  loading={tab.loading}
+                  onClick={tab.onClick}
+                  count={tab.count}
+                  isActive={tab.isActive}
+                  key={tab.title}
+                />
+              ))}
+            </div>
           </div>
           {currentSearchTab === SearchTabEnums.MOVIES && (
             <SearchMovieResult

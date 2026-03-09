@@ -30,26 +30,27 @@ const SearchMovieResult = ({
           ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.poster_path}`
           : "/assets/images/default.png";
         return (
-          <div
+          <button
+            type="button"
             key={movie.id}
-            className="card card-side bg-base-200 shadow-xl w-full h-52 flex flex-row"
+            className="card card-side bg-base-200 shadow-xl w-full h-52 flex flex-row text-left"
             onClick={() => handleClick(movie.id.toString())}
           >
-            <figure className="flex-none">
+            <figure className="hidden md:flex flex-none">
               <img className="max-w-[200px] h-full" src={imgSrc} alt="Movie" />
             </figure>
             <div className="card-body flex-1">
               <h2 className="card-title">{movie.title ?? movie.name}</h2>
-              <p className="text-gray-500">
+              <p className="hidden md:block text-gray-500">
                 Release Date:{" "}
                 {releaseDate
                   ? DateTime.fromISO(releaseDate).toFormat("DDD")
                   : "N/A"}
               </p>
-              <p>Vote average: {movie.vote_average ?? "N/A"}</p>
-              <p>{movie.overview && truncateString(movie.overview, 200)}</p>
+              <p className="hidden md:block">Vote average: {movie.vote_average ?? "N/A"}</p>
+              <p className="hidden md:block">{movie.overview && truncateString(movie.overview, 200)}</p>
             </div>
-          </div>
+          </button>
         );
       })}
       <SearchPagination
