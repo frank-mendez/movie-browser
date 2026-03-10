@@ -15,7 +15,7 @@ const SearchBar = () => {
   return (
     <div data-testid="searchbar-element" className="flex flex-row gap-2">
       <input
-        className="input input-bordered w-full"
+        className="input w-full"
         type="text"
         placeholder="Search for a movie, tv show, person"
         value={search.get("query") || ""}

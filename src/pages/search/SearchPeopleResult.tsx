@@ -1,7 +1,8 @@
 import { SearchMovieResultProps } from "../../types";
 import Loading from "../../components/Loading.tsx";
-import { hasValidImageExtension } from "../../utils/utils.ts";
+import { hasValidImageExtension, truncateString } from "../../utils/utils.ts";
 import SearchPagination from "./SearchPagination.tsx";
+import { useNavigate } from "react-router-dom";
 
 const SearchPeopleResult = ({
   loading,
@@ -9,31 +10,52 @@ const SearchPeopleResult = ({
   currentPage,
   handlePageChange,
 }: SearchMovieResultProps) => {
+  const navigate = useNavigate();
+
   return (
-    <div data-testid='search-result-people-element' className="flex flex-col flex-1 gap-6 cursor-pointer">
+    <div
+      data-testid="search-result-people-element"
+      className="flex flex-1 flex-col gap-6"
+    >
       {loading && <Loading />}
-      {data?.results.map((movie) => {
-        const imgSrc = hasValidImageExtension(movie.profile_path)
-          ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.profile_path}`
+      {data?.results.map((person) => {
+        const imgSrc = hasValidImageExtension(person.profile_path)
+          ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${person.profile_path}`
           : "/assets/images/default.png";
+
         return (
-          <div
-            key={movie.id}
-            className="card card-side bg-base-200 shadow-xl w-full h-52 flex flex-row"
+          <button
+            type="button"
+            key={person.id}
+            className="card w-full overflow-hidden bg-base-200 text-left shadow-xl transition-transform hover:-translate-y-0.5 md:card-side"
+            onClick={() => navigate(`/people/${person.id}`)}
           >
-            <figure className="hidden md:flex flex-none">
-              <img className="h-full" src={imgSrc} alt="Movie" />
+            <figure className="bg-base-300 md:max-w-[200px] md:flex-none">
+              <img
+                className="h-56 w-full object-cover md:h-full md:w-[200px]"
+                src={imgSrc}
+                alt={person.name ?? person.original_name ?? "Person"}
+              />
             </figure>
-            <div className="card-body flex-1">
-              <h2 className="card-title">{movie.original_name}</h2>
-              <p className="hidden md:block">{movie.known_for_department}</p>
-              <p className="hidden md:block">
-                {movie.known_for
-                  .map((item) => item.title ?? item.name ?? item.original_name)
-                  .join(", ")}
+            <div className="card-body flex-1 gap-2">
+              <h2 className="card-title">
+                {person.name ?? person.original_name}
+              </h2>
+              <p className="text-sm text-base-content/70">
+                {person.known_for_department || "Department unavailable"}
+              </p>
+              <p className="text-sm text-base-content/80">
+                {truncateString(
+                  person.known_for
+                    .map(
+                      (item) => item.title ?? item.name ?? item.original_name,
+                    )
+                    .join(", "),
+                  180,
+                ) || "No credits available."}
               </p>
             </div>
-          </div>
+          </button>
         );
       })}
       <SearchPagination

@@ -1,14 +1,15 @@
 import AppLayout from "../../layout/AppLayout.tsx";
 import SearchBar from "../../components/SearchBar.tsx";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { usePeopleQuery } from "../../api/people/query/usePeopleQuery.ts";
 import Loading from "../../components/Loading.tsx";
 import SearchPagination from "../search/SearchPagination.tsx";
 import { truncateString } from "../../utils/utils.ts";
+import PeopleCard from "../../components/PeopleCard.tsx";
 
 const People = () => {
   const [search, setSearch] = useSearchParams();
-  const currentPage = parseInt(search.get("page") || "1") - 1;
+  const currentPage = Number.parseInt(search.get("page") || "1", 10) - 1;
   const navigate = useNavigate();
 
   const handlePageChange = (page: number) => {
@@ -26,34 +27,24 @@ const People = () => {
           {data &&
             data?.results.length > 0 &&
             data.results.map((person) => (
-              <button
+              <PeopleCard
                 key={person.id}
                 onClick={() => {
                   navigate(`/people/${person.id}`);
                 }}
-                className="card bg-base-300 w-500 shadow-xl cursor-pointer hover:animate-pulse text-left"
-              >
-                <figure>
-                  <img
-                    src={`${import.meta.env.VITE_TMDB_IMAGE_URL}${person.profile_path}`}
-                    alt="Person"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{person.name}</h2>
-                  <p>
-                    {truncateString(
-                      person.known_for
-                        .map(
-                          (item) =>
-                            item.title ?? item.name ?? item.original_name,
-                        )
-                        .join(", "),
-                      40,
-                    )}
-                  </p>
-                </div>
-              </button>
+                className="w-full"
+                imageAlt="Person"
+                imageSrc={`${import.meta.env.VITE_TMDB_IMAGE_URL}${person.profile_path}`}
+                name={person.name}
+                description={truncateString(
+                  person.known_for
+                    .map(
+                      (item) => item.title ?? item.name ?? item.original_name,
+                    )
+                    .join(", "),
+                  40,
+                )}
+              />
             ))}
         </div>
         <div className="flex flex-row m-auto items-center my-10">

@@ -4,6 +4,8 @@ Movie Browser — TMDB-powered React App
 
 A modern movie discovery web application built with React and TypeScript, designed to explore, search, and browse movies using the TMDB API. This project focuses on clean architecture, performance, and real-world frontend best practices.
 
+The UI layer is built with Tailwind CSS 4 and daisyUI 5.
+
 Why this project
 
 I built this project to demonstrate how I approach API-driven frontend applications — handling async data, caching, UI state, testing, and performance in a clean and scalable way.
@@ -18,8 +20,15 @@ It’s intentionally designed as a production-style frontend, not a tutorial dem
 - Search movies with debounced input
 - Movie detail pages with metadata
 - Client-side caching and request deduplication using React Query
-- Responsive layout with Tailwind CSS
+- Responsive layout with Tailwind CSS 4 and daisyUI 5
 - Unit tests for core components and logic
+
+## Tech Stack
+
+- React 18 + TypeScript + Vite
+- React Router + React Query
+- Tailwind CSS 4 + daisyUI 5
+- Vitest + Testing Library
 
 ## Screenshots
 
@@ -50,7 +59,7 @@ To run this project, you will need to add the following environment variables to
 `VITE_TMDB_IMAGE_URL`,
 `VITE_TMDB_IMAGE_MULTI_FACE`
 
-Check the `.env.example` file for the required variables
+Check the `.env.sample` file for the required variables
 
 ## Run Locally
 
@@ -71,6 +80,8 @@ Install dependencies
 ```bash
   npm install
 ```
+
+This installs the Tailwind CSS 4 and daisyUI 5 toolchain used by the app.
 
 Start the server
 

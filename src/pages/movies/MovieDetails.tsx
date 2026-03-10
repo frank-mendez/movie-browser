@@ -70,7 +70,7 @@ const MovieDetails = () => {
                 key={cast.id}
                 gender={cast.gender}
                 name={cast.name}
-                character={cast.character}
+                description={cast.character}
                 imageSrc={imageSrc}
               />
             );
@@ -89,7 +89,7 @@ const MovieDetails = () => {
                 key={cast.id}
                 gender={cast.gender}
                 name={cast.name}
-                character={cast.character}
+                description={cast.character}
                 imageSrc={imageSrc}
               />
             );
@@ -113,7 +113,7 @@ const MovieDetails = () => {
                 key={cast.id}
                 gender={cast.gender}
                 name={cast.name}
-                character={cast.department}
+                description={cast.department}
                 imageSrc={imageSrc}
               />
             );
