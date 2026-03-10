@@ -3,6 +3,7 @@ import { MovieParamsEnum, MovieTabEnum } from "../../enums";
 import { MovieTabInterface } from "../../types";
 import { useState } from "react";
 import Loading from "../../components/Loading.tsx";
+import ScrollableTabs from "../../components/ScrollableTabs";
 import SearchBar from "../../components/SearchBar.tsx";
 import {
   useMovieGenresQuery,
@@ -64,18 +65,12 @@ const Movies = () => {
     <AppLayout>
       <div data-testid="movies-element" className="container m-auto p-5">
         <SearchBar />
-        <div role="tablist" className="tabs tabs-boxed my-10">
-          {movieTabs.map((tab) => (
-            <button
-              key={tab.value}
-              role="tab"
-              className={`tab ${currentTab === tab.value ? "tab-active" : ""}`}
-              onClick={() => handleTabChange(tab.value)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <ScrollableTabs
+          items={movieTabs}
+          activeValue={currentTab}
+          onChange={handleTabChange}
+          className="my-10"
+        />
         {isPending && <Loading />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 items-center ">
           {data && data?.results.length > 0 && (

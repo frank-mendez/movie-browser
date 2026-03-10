@@ -8,19 +8,15 @@ const Footer = () => {
   return (
     <footer
       data-testid="footer-element"
-      className="footer footer-center p-10 bg-base-100 text-base-content rounded"
+      className="footer footer-horizontal footer-center flex-wrap justify-center gap-6 rounded bg-base-100 p-6 text-base-content sm:p-8"
     >
-      <nav className="grid grid-flow-col gap-4">
+      <nav className="flex flex-row flex-wrap items-center justify-center gap-4">
         <Link to="/movies">Movies</Link>
-        <li>
-          <Link to="/tv-shows">Tv Shows</Link>
-        </li>
-        <li>
-          <Link to="/people">People</Link>
-        </li>
+        <Link to="/tv-shows">Tv Shows</Link>
+        <Link to="/people">People</Link>
       </nav>
       <nav>
-        <div className="grid grid-flow-col gap-4">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4">
           <a target="_blank" href="https://github.com/frank-mendez">
             <GitHubIcon />
           </a>
@@ -39,7 +35,7 @@ const Footer = () => {
         </div>
       </nav>
       <aside>
-        <p data-testid="copyright-element">Copyright © 2024 - Frank Mendez</p>
+        <p data-testid="copyright-element">Copyright © 2026 - Frank Mendez</p>
       </aside>
     </footer>
   );

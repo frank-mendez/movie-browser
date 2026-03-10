@@ -4,6 +4,7 @@ import { TvShowParamsEnum, TvShowTabEnum } from "../../enums";
 import SearchBar from "../../components/SearchBar.tsx";
 import Loading from "../../components/Loading.tsx";
 import MovieCard from "../../components/MovieCard.tsx";
+import ScrollableTabs from "../../components/ScrollableTabs";
 import SearchPagination from "../search/SearchPagination.tsx";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -61,20 +62,14 @@ const TvShow = () => {
 
   return (
     <AppLayout>
-      <div data-testid="tvshow-element" className="container m-auto py-6">
+      <div data-testid="tvshow-element" className="container m-auto p-5">
         <SearchBar />
-        <div role="tablist" className="tabs tabs-boxed my-10">
-          {tvShowTabs.map((tab) => (
-            <button
-              key={tab.value}
-              role="tab"
-              className={`tab ${currentTab === tab.value ? "tab-active" : ""}`}
-              onClick={() => handleTabChange(tab.value)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <ScrollableTabs
+          items={tvShowTabs}
+          activeValue={currentTab}
+          onChange={handleTabChange}
+          className="my-10"
+        />
         {isPending && <Loading />}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 items-center">
           {data && data?.results.length > 0 && (

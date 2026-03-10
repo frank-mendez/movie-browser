@@ -103,7 +103,7 @@ const Search = () => {
         <div className="flex flex-row gap-2 my-10">
           <input
             data-testid="search-input"
-            className="input input-bordered w-full"
+            className="input w-full"
             type="text"
             placeholder="Search for a movie, tv show, person"
             value={search.get("query") || ""}

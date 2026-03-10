@@ -54,7 +54,7 @@ const MovieCard = ({
           <button
             onClick={() => handleClick(movie.id.toString(), currentMediaType)}
             key={movie.id}
-            className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px] text-left"
+            className="card card-sm bg-base-300 shadow-xl cursor-pointer hover:animate-pulse h-[600px] text-left"
           >
             <figure>
               <img

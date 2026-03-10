@@ -34,7 +34,7 @@ const Header = () => {
           <div className="container m-auto flex w-full items-center">
             <div className="mx-2 navbar-start hidden px-2 lg:flex">
               <Link
-                className={location.pathname === "/" ? "active" : ""}
+                className={location.pathname === "/" ? "font-semibold" : ""}
                 to="/"
               >
                 Movie Browser
@@ -45,7 +45,9 @@ const Header = () => {
                 {/* Navbar menu content here */}
                 <li>
                   <Link
-                    className={location.pathname === "/movies" ? "active" : ""}
+                    className={
+                      location.pathname === "/movies" ? "menu-active" : ""
+                    }
                     data-testid="movie-link-element"
                     to="/movies"
                   >
@@ -55,7 +57,7 @@ const Header = () => {
                 <li>
                   <Link
                     className={
-                      location.pathname === "/tv-shows" ? "active" : ""
+                      location.pathname === "/tv-shows" ? "menu-active" : ""
                     }
                     data-testid="tvshow-link-element"
                     to="/tv-shows"
@@ -65,7 +67,9 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    className={location.pathname === "/people" ? "active" : ""}
+                    className={
+                      location.pathname === "/people" ? "menu-active" : ""
+                    }
                     data-testid="people-link-element"
                     to="/people"
                   >

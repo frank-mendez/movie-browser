@@ -3,7 +3,9 @@ type PeopleCardProps = {
   imageSrc?: string;
   gender?: number;
   name: string;
-  character: string;
+  description: string;
+  imageAlt?: string;
+  className?: string;
 };
 
 const PeopleCard = ({
@@ -11,24 +13,31 @@ const PeopleCard = ({
   imageSrc,
   gender,
   name,
-  character,
+  description,
+  imageAlt = "cast",
+  className = "",
 }: PeopleCardProps) => {
   const placeholderImage =
     gender === 1 ? "/assets/images/woman.png" : "/assets/images/man.png";
 
   return (
-    <button
-      onClick={onClick}
-      className="card bg-base-300 shadow-xl cursor-pointer hover:animate-pulse text-left"
+    <article
+      className={`card bg-base-300 shadow-xl hover:animate-pulse text-left ${className}`.trim()}
     >
-      <figure>
-        <img src={imageSrc || placeholderImage} alt="cast" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{name}</h2>
-        <p>{character}</p>
-      </div>
-    </button>
+      <button
+        type="button"
+        onClick={onClick}
+        className="cursor-pointer text-left"
+      >
+        <figure>
+          <img src={imageSrc || placeholderImage} alt={imageAlt} />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">{name}</h2>
+          <p>{description}</p>
+        </div>
+      </button>
+    </article>
   );
 };
 
