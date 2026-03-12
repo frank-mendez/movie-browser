@@ -97,37 +97,93 @@ export interface SpokenLanguage {
 }
 
 export interface MovieCreditsResponse {
-  id: number
-  cast: Cast[]
-  crew: Crew[]
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+}
+
+export interface MovieVideo {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+export interface MovieVideosResponse {
+  id: number;
+  results: MovieVideo[];
+}
+
+export interface WatchlistItem {
+  id: number;
+  title?: string;
+  name?: string;
+  poster_path: string;
+  vote_average: number;
+  release_date?: string;
+  first_air_date?: string;
+  media_type: string;
+  genre_ids: number[];
+  overview: string;
+  backdrop_path: string;
+  adult: boolean;
+  original_language: string;
+  popularity: number;
+  vote_count: number;
+  original_title?: string;
+  original_name?: string;
+  origin_country?: string[];
+  video?: boolean;
+}
+
+export interface MovieImage {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: string | null;
+  file_path: string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+export interface MovieImagesResponse {
+  id: number;
+  backdrops: MovieImage[];
+  logos: MovieImage[];
+  posters: MovieImage[];
 }
 
 export interface Cast {
-  adult: boolean
-  gender: number
-  id: number
-  known_for_department: string
-  name: string
-  original_name: string
-  popularity: number
-  profile_path?: string
-  cast_id: number
-  character: string
-  credit_id: string
-  order: number
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
 }
 
 export interface Crew {
-  adult: boolean
-  gender: number
-  id: number
-  known_for_department: string
-  name: string
-  original_name: string
-  popularity: number
-  profile_path?: string
-  credit_id: string
-  department: string
-  job: string
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path?: string;
+  credit_id: string;
+  department: string;
+  job: string;
 }
-

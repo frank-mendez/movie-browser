@@ -14,6 +14,8 @@ const movieKeys = {
   movieCollection: (params: MovieParams) => [...movieKeys.movieList(), params],
   movieDetails: (id: string) => ["movieDetails", id],
   movieCredits: (id: string) => ["movieCredits", id],
+  movieVideos: (id: string) => ["movieVideos", id],
+  movieImages: (id: string) => ["movieImages", id],
   movieGenres: () => ["movieGenres"],
 };
 

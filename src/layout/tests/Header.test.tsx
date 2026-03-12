@@ -36,7 +36,7 @@ describe("Header component", () => {
       </BrowserRouter>,
     );
 
-    expect(screen.getAllByRole("checkbox")).toHaveLength(3);
+    expect(screen.getAllByRole("checkbox")).toHaveLength(2);
   });
 
   it("navigates to Movies page on click", async () => {
@@ -58,7 +58,8 @@ describe("Header component", () => {
       </BrowserRouter>,
     );
     const user = userEvent.setup();
-    await user.click(screen.getByText("TV Shows"));
+    const tvShowsLinks = screen.getAllByText("TV Shows");
+    await user.click(tvShowsLinks[0]);
     expect(globalThis.location.pathname).toBe("/tv-shows");
     await user.click(screen.getByTestId("movie-link-element"));
     expect(globalThis.location.pathname).toBe("/movies");

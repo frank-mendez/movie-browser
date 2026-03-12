@@ -5,7 +5,9 @@ import {
   getTvShowCredits,
   getTvShowDetail,
   getTvShowGenres,
+  getTvShowImages,
   getTvShows,
+  getTvShowVideos,
 } from "../service/tv-show.service.ts";
 
 export const useTvShowQuery = (params: TvShowParams) => {
@@ -20,18 +22,34 @@ export const useTvShowDetailQuery = (id: string) => {
     queryKey: tvShowKeys.tvShowDetail(id),
     queryFn: () => getTvShowDetail(id),
   });
-}
+};
 
 export const useTvShowCreditsQuery = (id: string) => {
-    return useQuery({
-        queryKey: tvShowKeys.tvShowCredits(id),
-        queryFn: () => getTvShowCredits(id),
-    });
-}
+  return useQuery({
+    queryKey: tvShowKeys.tvShowCredits(id),
+    queryFn: () => getTvShowCredits(id),
+  });
+};
 
 export const useTvShowGenresQuery = () => {
   return useQuery({
     queryKey: tvShowKeys.tvShowGenres(),
     queryFn: getTvShowGenres,
+  });
+};
+
+export const useTvShowVideosQuery = (id: string) => {
+  return useQuery({
+    queryKey: tvShowKeys.tvShowVideos(id),
+    queryFn: () => getTvShowVideos(id),
+    enabled: !!id,
+  });
+};
+
+export const useTvShowImagesQuery = (id: string) => {
+  return useQuery({
+    queryKey: tvShowKeys.tvShowImages(id),
+    queryFn: () => getTvShowImages(id),
+    enabled: !!id,
   });
 };

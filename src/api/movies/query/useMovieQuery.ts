@@ -2,7 +2,9 @@ import {
   getMovieCredits,
   getMovieDetails,
   getMovieGenres,
+  getMovieImages,
   getMovies,
+  getMovieVideos,
   getTrendingMovies,
 } from "../service/movies.service.ts";
 import movieKeys from "./query-key-factory.ts";
@@ -36,15 +38,31 @@ export const useMovieDetailsQuery = (id: string) => {
 };
 
 export const useMovieCreditsQuery = (id: string) => {
-    return useQuery({
-        queryKey: movieKeys.movieCredits(id),
-        queryFn: () => getMovieCredits(id),
-    });
-}
+  return useQuery({
+    queryKey: movieKeys.movieCredits(id),
+    queryFn: () => getMovieCredits(id),
+  });
+};
 
 export const useMovieGenresQuery = () => {
   return useQuery({
     queryKey: movieKeys.movieGenres(),
     queryFn: getMovieGenres,
+  });
+};
+
+export const useMovieVideosQuery = (id: string) => {
+  return useQuery({
+    queryKey: movieKeys.movieVideos(id),
+    queryFn: () => getMovieVideos(id),
+    enabled: !!id,
+  });
+};
+
+export const useMovieImagesQuery = (id: string) => {
+  return useQuery({
+    queryKey: movieKeys.movieImages(id),
+    queryFn: () => getMovieImages(id),
+    enabled: !!id,
   });
 };
