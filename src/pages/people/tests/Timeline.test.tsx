@@ -1,9 +1,11 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { describe, it, expect, vi } from "vitest";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Timeline from "../Timeline.tsx";
+import {
+  makePeopleQueryClient,
+  renderPeopleRoute,
+} from "./peopleTestUtils.tsx";
 
 vi.mock("../../../api/people/query/usePeopleQuery.ts", () => ({
   usePersonCreditsQuery: () => ({
@@ -65,20 +67,8 @@ vi.mock("../../../api/people/query/usePeopleQuery.ts", () => ({
   }),
 }));
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: false } },
-});
-
-const renderComponent = () =>
-  render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={["/people/1"]}>
-        <Routes>
-          <Route path="/people/:personId" element={<Timeline />} />
-        </Routes>
-      </MemoryRouter>
-    </QueryClientProvider>,
-  );
+const queryClient = makePeopleQueryClient();
+const renderComponent = () => renderPeopleRoute(<Timeline />, queryClient);
 
 describe("Timeline", () => {
   it("renders year markers", () => {

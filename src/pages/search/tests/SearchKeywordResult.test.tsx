@@ -1,26 +1,18 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { describe, it, expect, vi } from "vitest";
-import { BrowserRouter } from "react-router-dom";
+import { describe, it, expect } from "vitest";
 import SearchKeywordResult from "../SearchKeywordResult";
 import { MediaTypeEnum } from "../../../enums/MovieTabEnum.ts";
+import {
+  makeSearchResultProps,
+  renderInBrowserRouter,
+} from "./searchResultTestUtils.tsx";
 
-const mockHandlePageChange = vi.fn();
-
-const makeProps = (overrides = {}) => ({
-  loading: false,
-  data: undefined,
-  currentPage: 1,
-  handlePageChange: mockHandlePageChange,
-  mediaType: MediaTypeEnum.KEYWORD,
-  ...overrides,
-});
-
-const renderComponent = (props = {}) =>
-  render(
-    <BrowserRouter>
-      <SearchKeywordResult {...makeProps(props)} />
-    </BrowserRouter>,
+const renderComponent = (overrides = {}) =>
+  renderInBrowserRouter(
+    <SearchKeywordResult
+      {...makeSearchResultProps(MediaTypeEnum.KEYWORD, overrides)}
+    />,
   );
 
 describe("SearchKeywordResult component", () => {
