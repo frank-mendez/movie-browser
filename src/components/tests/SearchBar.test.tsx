@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { describe, it, expect, vi } from "vitest";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { describe, it, expect } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 import SearchBar from "../SearchBar";
 
 const renderComponent = (initialEntries = ["/"]) =>
@@ -71,10 +71,13 @@ describe("SearchBar component", () => {
 
   it("does not navigate on submit when input is empty", () => {
     const { container } = renderComponent();
-    const form = container.querySelector("form")!;
-    fireEvent.submit(form);
+    const form = container.querySelector("form");
+    expect(form).not.toBeNull();
+    if (form) {
+      fireEvent.submit(form);
+    }
     // Should stay on current location
-    expect(window.location.pathname).not.toContain("search");
+    expect(globalThis.location.pathname).not.toContain("search");
   });
 
   it("does not navigate on Enter key when input is empty", () => {
@@ -83,6 +86,6 @@ describe("SearchBar component", () => {
       "Search movies, TV shows, people…",
     );
     fireEvent.keyDown(input, { key: "Enter" });
-    expect(window.location.pathname).not.toContain("search");
+    expect(globalThis.location.pathname).not.toContain("search");
   });
 });

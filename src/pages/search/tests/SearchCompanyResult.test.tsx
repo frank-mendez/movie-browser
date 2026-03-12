@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import { describe, it, expect, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import SearchCompanyResult from "../SearchCompanyResult";
+import { MediaTypeEnum } from "../../../enums/MovieTabEnum.ts";
 
 const mockHandlePageChange = vi.fn();
 
@@ -11,6 +12,7 @@ const makeProps = (overrides = {}) => ({
   data: undefined,
   currentPage: 1,
   handlePageChange: mockHandlePageChange,
+  mediaType: MediaTypeEnum.COMPANY,
   ...overrides,
 });
 

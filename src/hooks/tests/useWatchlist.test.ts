@@ -2,8 +2,9 @@ import { renderHook, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { describe, it, expect, beforeEach } from "vitest";
 import { useWatchlist } from "../useWatchlist";
+import type { WatchlistItem } from "../../types/movies.ts";
 
-const mockItem = {
+const mockItem: WatchlistItem = {
   id: 1,
   title: "Inception",
   poster_path: "/inception.jpg",
@@ -12,6 +13,13 @@ const mockItem = {
   media_type: "movie",
   genre_ids: [28],
   overview: "A mind-bending thriller.",
+  backdrop_path: "/inception-backdrop.jpg",
+  adult: false,
+  original_language: "en",
+  popularity: 95.4,
+  vote_count: 32000,
+  original_title: "Inception",
+  video: false,
 };
 
 describe("useWatchlist hook", () => {

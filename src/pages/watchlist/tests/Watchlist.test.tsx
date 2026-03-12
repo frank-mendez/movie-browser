@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Watchlist from "../Watchlist";
@@ -137,7 +137,7 @@ describe("Watchlist page", () => {
           id: 42,
           title: "The Dark Knight",
           poster_path: null,
-          vote_average: 9.0,
+          vote_average: 9,
           release_date: "2008-07-18",
           media_type: "movie",
           genre_ids: [],
@@ -147,7 +147,7 @@ describe("Watchlist page", () => {
     );
     renderComponent();
     fireEvent.click(screen.getByText("The Dark Knight"));
-    expect(window.location.pathname).toBe("/movies/42");
+    expect(globalThis.location.pathname).toBe("/movies/42");
   });
 
   it("navigates to tv-shows when a TV item is clicked", () => {
@@ -168,7 +168,7 @@ describe("Watchlist page", () => {
     );
     renderComponent();
     fireEvent.click(screen.getByText("Breaking Bad"));
-    expect(window.location.pathname).toBe("/tv-shows/99");
+    expect(globalThis.location.pathname).toBe("/tv-shows/99");
   });
 
   it("removes item from watchlist when remove button is clicked", () => {
@@ -201,7 +201,7 @@ describe("Watchlist page", () => {
           id: 1,
           title: "No Poster",
           poster_path: null,
-          vote_average: 5.0,
+          vote_average: 5,
           release_date: "2020-01-01",
           media_type: "movie",
           genre_ids: [],

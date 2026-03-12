@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import { describe, it, expect, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import SearchKeywordResult from "../SearchKeywordResult";
+import { MediaTypeEnum } from "../../../enums/MovieTabEnum.ts";
 
 const mockHandlePageChange = vi.fn();
 
@@ -11,6 +12,7 @@ const makeProps = (overrides = {}) => ({
   data: undefined,
   currentPage: 1,
   handlePageChange: mockHandlePageChange,
+  mediaType: MediaTypeEnum.KEYWORD,
   ...overrides,
 });
 
@@ -78,6 +80,6 @@ describe("SearchKeywordResult component", () => {
       },
     });
     fireEvent.click(screen.getByText("action"));
-    expect(window.location.href).toContain("action");
+    expect(globalThis.location.href).toContain("action");
   });
 });
