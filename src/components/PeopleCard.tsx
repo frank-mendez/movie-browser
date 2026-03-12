@@ -14,30 +14,35 @@ const PeopleCard = ({
   gender,
   name,
   description,
-  imageAlt = "cast",
+  imageAlt = "Person",
   className = "",
 }: PeopleCardProps) => {
   const placeholderImage =
     gender === 1 ? "/assets/images/woman.png" : "/assets/images/man.png";
 
   return (
-    <article
-      className={`card bg-base-300 shadow-xl hover:animate-pulse text-left ${className}`.trim()}
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group relative overflow-hidden rounded-xl shadow-md cursor-pointer text-left transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className}`.trim()}
     >
-      <button
-        type="button"
-        onClick={onClick}
-        className="cursor-pointer text-left"
-      >
-        <figure>
-          <img src={imageSrc || placeholderImage} alt={imageAlt} />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{name}</h2>
-          <p>{description}</p>
-        </div>
-      </button>
-    </article>
+      <div className="aspect-[2/3] overflow-hidden bg-base-300">
+        <img
+          src={imageSrc || placeholderImage}
+          alt={imageAlt}
+          loading="lazy"
+          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+        />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3">
+        <h3 className="text-white text-sm font-semibold leading-tight line-clamp-1 mb-0.5">
+          {name}
+        </h3>
+        {description && (
+          <p className="text-white/60 text-xs line-clamp-1">{description}</p>
+        )}
+      </div>
+    </button>
   );
 };
 

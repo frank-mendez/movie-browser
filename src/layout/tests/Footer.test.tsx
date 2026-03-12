@@ -21,7 +21,7 @@ describe("Footer component", () => {
       </BrowserRouter>,
     );
     expect(
-      screen.getByText("Copyright © 2026 - Frank Mendez"),
+      screen.getByText("Copyright © 2026 – Frank Mendez"),
     ).toBeInTheDocument();
   });
 });
