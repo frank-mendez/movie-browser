@@ -10,8 +10,7 @@ vi.mock("../../../api/people/query/usePeopleQuery.ts", () => ({
     data: {
       id: 1,
       name: "Test Person",
-      biography:
-        "A great biography. ".repeat(40), // longer than 600 chars to trigger Read More
+      biography: "A great biography. ".repeat(40), // longer than 600 chars to trigger Read More
       birthday: "1990-01-15",
       deathday: null,
       gender: 2,
@@ -82,19 +81,27 @@ describe("PersonDetails", () => {
 
   it("truncates long biography and shows Read more button", () => {
     renderComponent();
-    expect(screen.getByRole("button", { name: /read more/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /read more/i }),
+    ).toBeInTheDocument();
   });
 
   it("expands biography when Read more is clicked", () => {
     renderComponent();
     const btn = screen.getByRole("button", { name: /read more/i });
     fireEvent.click(btn);
-    expect(screen.getByRole("button", { name: /show less/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /show less/i }),
+    ).toBeInTheDocument();
   });
 
   it("renders section headings for Known For and Career Timeline", () => {
     renderComponent();
-    expect(screen.getByRole("heading", { name: "Known For" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Career Timeline" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Known For" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Career Timeline" }),
+    ).toBeInTheDocument();
   });
 });
