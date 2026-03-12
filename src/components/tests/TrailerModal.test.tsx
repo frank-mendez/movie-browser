@@ -11,7 +11,7 @@ const renderModal = (props: {
 }) =>
   render(
     <TrailerModal
-      trailerKey={props.trailerKey !== undefined ? props.trailerKey : "abc123"}
+      trailerKey={props.trailerKey === undefined ? "abc123" : props.trailerKey}
       isOpen={props.isOpen ?? true}
       onClose={props.onClose ?? vi.fn()}
       title={props.title}
