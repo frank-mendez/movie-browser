@@ -2,6 +2,8 @@ import { SearchMovieResultProps } from "../../types";
 import SearchPagination from "./SearchPagination.tsx";
 import ReactCountryFlag from "react-country-flag";
 
+const COMPANY_SKELETON_KEYS = ["cs-0", "cs-1", "cs-2", "cs-3", "cs-4", "cs-5"];
+
 const SearchCompanyResult = ({
   loading,
   data,
@@ -11,8 +13,8 @@ const SearchCompanyResult = ({
   if (loading) {
     return (
       <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="skeleton h-40 rounded-xl" />
+        {COMPANY_SKELETON_KEYS.map((key) => (
+          <div key={key} className="skeleton h-40 rounded-xl" />
         ))}
       </div>
     );
@@ -45,8 +47,18 @@ const SearchCompanyResult = ({
                 </div>
               ) : (
                 <div className="flex h-20 items-center justify-center rounded-lg bg-base-300 text-base-content/30">
-                  <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  <svg
+                    className="h-10 w-10"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
                   </svg>
                 </div>
               )}

@@ -74,11 +74,7 @@ const Movies = () => {
 
           {/* Genre filter */}
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-outline btn-sm gap-1"
-            >
+            <button tabIndex={0} className="btn btn-outline btn-sm gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -94,11 +90,8 @@ const Movies = () => {
                 />
               </svg>
               {selectedGenre ? movieGenres[selectedGenre] : "Genre"}
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-base-200 rounded-box z-50 w-48 p-2 shadow-xl max-h-64 overflow-y-auto"
-            >
+            </button>
+            <ul className="dropdown-content menu bg-base-200 rounded-box z-50 w-48 p-2 shadow-xl max-h-64 overflow-y-auto">
               <li>
                 <button
                   className={selectedGenre === null ? "active" : ""}
@@ -121,36 +114,39 @@ const Movies = () => {
           </div>
         </div>
 
-        {isPending ? (
-          <SkeletonGrid count={10} />
-        ) : filteredMovies.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-base-content/50 gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1}
-              stroke="currentColor"
-              className="h-16 w-16"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75.125h-.625a1.125 1.125 0 0 1-1.125-1.125V4.875A1.125 1.125 0 0 1 3 3.75h17.25A1.125 1.125 0 0 1 21.375 4.875v13.5A1.125 1.125 0 0 1 20.25 19.5h-.625"
+        {(() => {
+          if (isPending) return <SkeletonGrid count={10} />;
+          if (filteredMovies.length === 0)
+            return (
+              <div className="flex flex-col items-center justify-center py-20 text-base-content/50 gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1}
+                  stroke="currentColor"
+                  className="h-16 w-16"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75.125h-.625a1.125 1.125 0 0 1-1.125-1.125V4.875A1.125 1.125 0 0 1 3 3.75h17.25A1.125 1.125 0 0 1 21.375 4.875v13.5A1.125 1.125 0 0 1 20.25 19.5h-.625"
+                  />
+                </svg>
+                <p className="text-lg font-medium">No movies found</p>
+                <p className="text-sm">Try a different genre or category</p>
+              </div>
+            );
+          return (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+              <MovieCard
+                mediaType={MediaTypeEnum.MOVIE}
+                movies={filteredMovies}
+                genreMapByType={{ movie: movieGenres }}
               />
-            </svg>
-            <p className="text-lg font-medium">No movies found</p>
-            <p className="text-sm">Try a different genre or category</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            <MovieCard
-              mediaType={MediaTypeEnum.MOVIE}
-              movies={filteredMovies}
-              genreMapByType={{ movie: movieGenres }}
-            />
-          </div>
-        )}
+            </div>
+          );
+        })()}
 
         <div className="flex justify-center mt-10">
           <SearchPagination

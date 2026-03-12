@@ -111,7 +111,7 @@ describe("HeroSection component", () => {
   it("navigates to movie details on View Details click", () => {
     renderComponent();
     fireEvent.click(screen.getByText("View Details"));
-    expect(window.location.pathname).toBe("/movies/1");
+    expect(globalThis.location.pathname).toBe("/movies/1");
   });
 
   it("navigates to tv-show details for tv media type", () => {
@@ -125,7 +125,7 @@ describe("HeroSection component", () => {
       },
     });
     fireEvent.click(screen.getByText("View Details"));
-    expect(window.location.pathname).toBe("/tv-shows/99");
+    expect(globalThis.location.pathname).toBe("/tv-shows/99");
   });
 
   it("renders backdrop image when backdrop_path is provided", () => {

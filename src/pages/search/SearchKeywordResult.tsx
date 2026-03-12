@@ -2,6 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { SearchMovieResultProps } from "../../types";
 import SearchPagination from "./SearchPagination.tsx";
 
+const KEYWORD_SKELETON_KEYS = Array.from(
+  { length: 12 },
+  (_, i) => `kw-skeleton-${i}`,
+);
+
 const SearchKeywordResult = ({
   loading,
   data,
@@ -13,8 +18,8 @@ const SearchKeywordResult = ({
   if (loading) {
     return (
       <div className="flex flex-1 flex-wrap gap-3">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="skeleton h-8 w-24 rounded-full" />
+        {KEYWORD_SKELETON_KEYS.map((key) => (
+          <div key={key} className="skeleton h-8 w-24 rounded-full" />
         ))}
       </div>
     );

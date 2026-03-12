@@ -17,6 +17,15 @@ const HeroSection = ({ movie, onPlayTrailer }: HeroSectionProps) => {
   const rating = Math.round(movie.vote_average * 10);
   const mediaType = movie.media_type ?? "movie";
 
+  let ratingBadge: string;
+  if (rating >= 70) {
+    ratingBadge = "badge-success";
+  } else if (rating >= 40) {
+    ratingBadge = "badge-warning";
+  } else {
+    ratingBadge = "badge-error";
+  }
+
   const handleViewDetails = () => {
     if (mediaType === "movie") navigate(`/movies/${movie.id}`);
     else if (mediaType === "tv") navigate(`/tv-shows/${movie.id}`);
@@ -61,15 +70,7 @@ const HeroSection = ({ movie, onPlayTrailer }: HeroSectionProps) => {
 
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-3 mb-4 text-sm text-white/80">
-          <span
-            className={`badge font-bold ${
-              rating >= 70
-                ? "badge-success"
-                : rating >= 40
-                  ? "badge-warning"
-                  : "badge-error"
-            }`}
-          >
+          <span className={`badge font-bold ${ratingBadge}`}>
             ★ {movie.vote_average.toFixed(1)}
           </span>
           {(movie.release_date ?? movie.first_air_date) && (

@@ -118,14 +118,30 @@ const Search = () => {
                 <span className="text-primary">&ldquo;{query}&rdquo;</span>
               </h1>
             ) : (
-              <h1 data-testid="search-result" className="text-2xl font-bold text-base-content/40">
+              <h1
+                data-testid="search-result"
+                className="text-2xl font-bold text-base-content/40"
+              >
                 Search for movies, TV shows &amp; people
               </h1>
             )}
             <form onSubmit={handleSearch} className="flex max-w-xl gap-2">
-              <label className="input input-bordered flex flex-1 items-center gap-2">
-                <svg className="h-4 w-4 shrink-0 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+              <label
+                aria-label="Search"
+                className="input input-bordered flex flex-1 items-center gap-2"
+              >
+                <svg
+                  className="h-4 w-4 shrink-0 opacity-50"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                  />
                 </svg>
                 <input
                   ref={inputRef}
@@ -137,7 +153,9 @@ const Search = () => {
                   key={query}
                 />
               </label>
-              <button type="submit" className="btn btn-primary">Search</button>
+              <button type="submit" className="btn btn-primary">
+                Search
+              </button>
             </form>
           </div>
         </div>
@@ -147,7 +165,9 @@ const Search = () => {
           <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
             {/* Sidebar Tabs */}
             <aside className="flex-none lg:w-56">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-base-content/40">Category</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-base-content/40">
+                Category
+              </p>
               <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
                 {SearchTabs.map((tab) => (
                   <SearchTab
@@ -165,22 +185,58 @@ const Search = () => {
             {/* Results */}
             <main className="flex-1 min-w-0">
               {currentSearchTab === SearchTabEnums.MOVIES && (
-                <SearchMovieResult loading={moviePending} data={movieData} currentPage={currentPage} handlePageChange={handlePageChange} mediaType={MediaTypeEnum.MOVIE} />
+                <SearchMovieResult
+                  loading={moviePending}
+                  data={movieData}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  mediaType={MediaTypeEnum.MOVIE}
+                />
               )}
               {currentSearchTab === SearchTabEnums.TV_SHOWS && (
-                <SearchMovieResult loading={tvShowPending} data={tvShowData} currentPage={currentPage} handlePageChange={handlePageChange} mediaType={MediaTypeEnum.TV} />
+                <SearchMovieResult
+                  loading={tvShowPending}
+                  data={tvShowData}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  mediaType={MediaTypeEnum.TV}
+                />
               )}
               {currentSearchTab === SearchTabEnums.PEOPLE && (
-                <SearchPeopleResult loading={peoplePending} handlePageChange={handlePageChange} data={peopleData} currentPage={currentPage} mediaType={MediaTypeEnum.PERSON} />
+                <SearchPeopleResult
+                  loading={peoplePending}
+                  handlePageChange={handlePageChange}
+                  data={peopleData}
+                  currentPage={currentPage}
+                  mediaType={MediaTypeEnum.PERSON}
+                />
               )}
               {currentSearchTab === SearchTabEnums.COLLECTIONS && (
-                <SearchMovieResult loading={collectionPending} data={collectionData} currentPage={currentPage} handlePageChange={handlePageChange} mediaType={MediaTypeEnum.COLLECTION} />
+                <SearchMovieResult
+                  loading={collectionPending}
+                  data={collectionData}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  mediaType={MediaTypeEnum.COLLECTION}
+                />
               )}
               {currentSearchTab === SearchTabEnums.KEYWORDS && (
-                <SearchKeywordResult loading={keywordPending} data={keywordData} handlePageChange={handlePageChange} currentPage={currentPage} mediaType={MediaTypeEnum.KEYWORD} />
+                <SearchKeywordResult
+                  loading={keywordPending}
+                  data={keywordData}
+                  handlePageChange={handlePageChange}
+                  currentPage={currentPage}
+                  mediaType={MediaTypeEnum.KEYWORD}
+                />
               )}
               {currentSearchTab === SearchTabEnums.COMPANIES && (
-                <SearchCompanyResult loading={companyPending} data={companyData} currentPage={currentPage} handlePageChange={handlePageChange} mediaType={MediaTypeEnum.COMPANY} />
+                <SearchCompanyResult
+                  loading={companyPending}
+                  data={companyData}
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  mediaType={MediaTypeEnum.COMPANY}
+                />
               )}
             </main>
           </div>

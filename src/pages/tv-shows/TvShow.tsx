@@ -74,11 +74,7 @@ const TvShow = () => {
 
           {/* Genre filter */}
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-outline btn-sm gap-1"
-            >
+            <button tabIndex={0} className="btn btn-outline btn-sm gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -94,11 +90,8 @@ const TvShow = () => {
                 />
               </svg>
               {selectedGenre ? tvGenres[selectedGenre] : "Genre"}
-            </div>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-base-200 rounded-box z-50 w-48 p-2 shadow-xl max-h-64 overflow-y-auto"
-            >
+            </button>
+            <ul className="dropdown-content menu bg-base-200 rounded-box z-50 w-48 p-2 shadow-xl max-h-64 overflow-y-auto">
               <li>
                 <button
                   className={selectedGenre === null ? "active" : ""}
@@ -121,36 +114,39 @@ const TvShow = () => {
           </div>
         </div>
 
-        {isPending ? (
-          <SkeletonGrid count={10} />
-        ) : filteredShows.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-base-content/50 gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1}
-              stroke="currentColor"
-              className="h-16 w-16"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z"
+        {(() => {
+          if (isPending) return <SkeletonGrid count={10} />;
+          if (filteredShows.length === 0)
+            return (
+              <div className="flex flex-col items-center justify-center py-20 text-base-content/50 gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1}
+                  stroke="currentColor"
+                  className="h-16 w-16"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z"
+                  />
+                </svg>
+                <p className="text-lg font-medium">No TV shows found</p>
+                <p className="text-sm">Try a different genre or category</p>
+              </div>
+            );
+          return (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+              <MovieCard
+                mediaType={MediaTypeEnum.TV}
+                movies={filteredShows}
+                genreMapByType={{ tv: tvGenres }}
               />
-            </svg>
-            <p className="text-lg font-medium">No TV shows found</p>
-            <p className="text-sm">Try a different genre or category</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            <MovieCard
-              mediaType={MediaTypeEnum.TV}
-              movies={filteredShows}
-              genreMapByType={{ tv: tvGenres }}
-            />
-          </div>
-        )}
+            </div>
+          );
+        })()}
 
         <div className="flex justify-center mt-10">
           <SearchPagination

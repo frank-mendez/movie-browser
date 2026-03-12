@@ -114,12 +114,12 @@ describe("MovieCard", () => {
     };
     renderCard([tvMovie]);
     fireEvent.click(screen.getByRole("button"));
-    expect(window.location.pathname).toBe("/tv-shows/42");
+    expect(globalThis.location.pathname).toBe("/tv-shows/42");
   });
 
   it("navigates to movies route on movie click", () => {
     renderCard([baseMovie]);
     fireEvent.click(screen.getByRole("button"));
-    expect(window.location.pathname).toBe("/movies/762441");
+    expect(globalThis.location.pathname).toBe("/movies/762441");
   });
 });

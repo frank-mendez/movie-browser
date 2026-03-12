@@ -8,10 +8,16 @@ const SkeletonCard = () => (
   </div>
 );
 
+const MAX_SKELETON_COUNT = 20;
+const SKELETON_KEYS = Array.from(
+  { length: MAX_SKELETON_COUNT },
+  (_, i) => `skeleton-${i}`,
+);
+
 export const SkeletonGrid = ({ count = 10 }: { count?: number }) => (
   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-    {Array.from({ length: count }).map((_, i) => (
-      <SkeletonCard key={i} />
+    {SKELETON_KEYS.slice(0, count).map((key) => (
+      <SkeletonCard key={key} />
     ))}
   </div>
 );

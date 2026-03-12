@@ -6,7 +6,7 @@ const SearchPagination = ({
   handlePageChange,
 }: SearchPaginationProps) => {
   const [search] = useSearchParams();
-  const activePage = parseInt(search.get("page") || "1");
+  const activePage = Number.parseInt(search.get("page") || "1");
   const maxPages = Math.min(data?.total_pages ?? 0, 500); // TMDB caps at 500
 
   if (!data || maxPages <= 1) {
@@ -31,7 +31,10 @@ const SearchPagination = ({
   }
 
   return (
-    <div data-testid="search-pagination-element" className="mt-6 flex justify-center">
+    <div
+      data-testid="search-pagination-element"
+      className="mt-6 flex justify-center"
+    >
       <div className="join">
         <button
           className="join-item btn btn-sm"
@@ -42,13 +45,16 @@ const SearchPagination = ({
         </button>
         {pages.map((page, i) =>
           page === "..." ? (
-            <button key={`ellipsis-${i}`} className="join-item btn btn-sm btn-disabled">
+            <button
+              key={`ellipsis-after-${pages[i - 1]}`}
+              className="join-item btn btn-sm btn-disabled"
+            >
               …
             </button>
           ) : (
             <button
               key={page}
-              onClick={() => handlePageChange(page as number)}
+              onClick={() => handlePageChange(page)}
               className={`join-item btn btn-sm ${
                 activePage === page ? "btn-active btn-primary" : ""
               }`}

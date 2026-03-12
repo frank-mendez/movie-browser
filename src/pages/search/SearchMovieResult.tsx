@@ -10,6 +10,8 @@ const getRatingColor = (r: number) => {
   return "badge-error";
 };
 
+const MOVIE_SKELETON_KEYS = ["ms-0", "ms-1", "ms-2", "ms-3", "ms-4", "ms-5"];
+
 const SkeletonRow = () => (
   <div className="flex gap-4 rounded-xl bg-base-200 p-3">
     <div className="skeleton h-36 w-24 shrink-0 rounded-lg" />
@@ -37,11 +39,14 @@ const SearchMovieResult = ({
   };
 
   return (
-    <div data-testid="search-movie-result-element" className="flex flex-1 flex-col gap-4">
+    <div
+      data-testid="search-movie-result-element"
+      className="flex flex-1 flex-col gap-4"
+    >
       {loading && (
         <div data-testid="loading-element" className="flex flex-col gap-4">
           {!data?.results?.length &&
-            Array.from({ length: 6 }).map((_, i) => <SkeletonRow key={i} />)}
+            MOVIE_SKELETON_KEYS.map((key) => <SkeletonRow key={key} />)}
           {data?.results?.length ? (
             <progress className="progress progress-primary w-full" />
           ) : null}
@@ -50,8 +55,18 @@ const SearchMovieResult = ({
 
       {!loading && !data?.results?.length && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-20 text-center text-base-content/40">
-          <svg className="h-14 w-14 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+          <svg
+            className="h-14 w-14 opacity-40"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+            />
           </svg>
           <p className="text-lg font-medium">No results found</p>
           <p className="text-sm">Try adjusting your search terms</p>
@@ -59,7 +74,8 @@ const SearchMovieResult = ({
       )}
 
       {data?.results?.map((movie) => {
-        const releaseDate = movie.release_date ?? movie.first_air_date ?? undefined;
+        const releaseDate =
+          movie.release_date ?? movie.first_air_date ?? undefined;
         const imgSrc = hasValidImageExtension(movie.poster_path)
           ? `${import.meta.env.VITE_TMDB_IMAGE_URL}${movie.poster_path}`
           : "/assets/images/default.png";
@@ -86,7 +102,9 @@ const SearchMovieResult = ({
                   {movie.title ?? movie.name}
                 </h3>
                 {rating > 0 && (
-                  <span className={`badge badge-sm shrink-0 ${getRatingColor(rating)}`}>
+                  <span
+                    className={`badge badge-sm shrink-0 ${getRatingColor(rating)}`}
+                  >
                     ★ {rating.toFixed(1)}
                   </span>
                 )}

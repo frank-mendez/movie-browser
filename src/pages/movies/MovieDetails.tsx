@@ -74,12 +74,14 @@ const MovieDetails = () => {
     }
   };
 
-  const ratingColor =
-    rating >= 70
-      ? "badge-success"
-      : rating >= 40
-        ? "badge-warning"
-        : "badge-error";
+  let ratingColor: string;
+  if (rating >= 70) {
+    ratingColor = "badge-success";
+  } else if (rating >= 40) {
+    ratingColor = "badge-warning";
+  } else {
+    ratingColor = "badge-error";
+  }
 
   const allCast = movieCredits?.cast ?? [];
 
@@ -212,38 +214,41 @@ const MovieDetails = () => {
           {/* Cast */}
           <section>
             <h2 className="text-2xl font-bold mb-6">Cast</h2>
-            {creditsPending ? (
-              <SkeletonGrid count={8} />
-            ) : allCast.length === 0 ? (
-              <p className="text-base-content/50">
-                No cast information available.
-              </p>
-            ) : (
-              <div
-                data-testid="cast-element"
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4"
-              >
-                {allCast.slice(0, 16).map((cast) => {
-                  const genderImage =
-                    cast.gender === 1
-                      ? "/assets/images/woman.png"
-                      : "/assets/images/man.png";
-                  const imageSrc = cast.profile_path
-                    ? import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path
-                    : genderImage;
-                  return (
-                    <PeopleCard
-                      onClick={() => navigate(`/people/${cast.id}`)}
-                      key={cast.id}
-                      gender={cast.gender}
-                      name={cast.name}
-                      description={cast.character}
-                      imageSrc={imageSrc}
-                    />
-                  );
-                })}
-              </div>
-            )}
+            {(() => {
+              if (creditsPending) return <SkeletonGrid count={8} />;
+              if (allCast.length === 0)
+                return (
+                  <p className="text-base-content/50">
+                    No cast information available.
+                  </p>
+                );
+              return (
+                <div
+                  data-testid="cast-element"
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4"
+                >
+                  {allCast.slice(0, 16).map((cast) => {
+                    const genderImage =
+                      cast.gender === 1
+                        ? "/assets/images/woman.png"
+                        : "/assets/images/man.png";
+                    const imageSrc = cast.profile_path
+                      ? import.meta.env.VITE_TMDB_IMAGE_URL + cast.profile_path
+                      : genderImage;
+                    return (
+                      <PeopleCard
+                        onClick={() => navigate(`/people/${cast.id}`)}
+                        key={cast.id}
+                        gender={cast.gender}
+                        name={cast.name}
+                        description={cast.character}
+                        imageSrc={imageSrc}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })()}
           </section>
 
           {(movieCredits?.crew?.length ?? 0) > 0 && (

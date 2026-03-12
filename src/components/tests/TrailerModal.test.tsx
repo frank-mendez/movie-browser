@@ -3,18 +3,23 @@ import "@testing-library/jest-dom";
 import { describe, it, expect, vi } from "vitest";
 import TrailerModal from "../TrailerModal";
 
-const renderModal = (props: {
+const renderModal = ({
+  trailerKey = "abc123",
+  isOpen = true,
+  onClose = vi.fn(),
+  title,
+}: {
   trailerKey?: string | null;
   isOpen?: boolean;
   onClose?: () => void;
   title?: string;
-}) =>
+} = {}) =>
   render(
     <TrailerModal
-      trailerKey={props.trailerKey === undefined ? "abc123" : props.trailerKey}
-      isOpen={props.isOpen ?? true}
-      onClose={props.onClose ?? vi.fn()}
-      title={props.title}
+      trailerKey={trailerKey}
+      isOpen={isOpen}
+      onClose={onClose}
+      title={title}
     />,
   );
 
