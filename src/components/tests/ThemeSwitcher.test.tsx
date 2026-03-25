@@ -8,4 +8,10 @@ describe('ThemeSwitcher component', () => {
         render(<ThemeSwitcher />);
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
     });
+
+    it('label has cursor-pointer class for mobile tap support', () => {
+        const { container } = render(<ThemeSwitcher />);
+        const label = container.querySelector('label');
+        expect(label).toHaveClass('cursor-pointer');
+    });
 });
